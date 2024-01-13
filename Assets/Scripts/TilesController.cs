@@ -18,4 +18,9 @@ public class TilesController : MonoBehaviour
 	{
 		return tileCoords.Contains(pos);
 	}
+
+	public bool IsTile(Vector3 pos)
+	{
+		return IsTile(new Vector3Int((int)pos.x, (int)pos.y, (int)pos.z));
+	}
 }
