@@ -7,8 +7,9 @@ public abstract class Interactable : MonoBehaviour
 {
 	private void OnTriggerEnter(Collider other)
 	{
-		OnInteract();
+		if (other.gameObject.TryGetComponent<PlayerController>(out var pc))
+			OnInteract(pc);
 	}
 
-	protected abstract void OnInteract();
+	protected abstract void OnInteract(PlayerController pc);
 }

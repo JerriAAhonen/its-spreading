@@ -5,68 +5,31 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-	[SerializeField] private float movementSpeed;
-	[SerializeField] private TilesController tiles;
+	[SerializeField] private TilesController tc;
 
-	private Vector3 lastTargetPos;
-	private Queue<Vector3> targetPositions = new();
-	private Coroutine movementRoutine;
+	private InputController ic;
+	private PlayerMovement movement;
 
-	private void Update()
+	private bool hasFireflies;
+
+	public bool HasFireflies => hasFireflies;
+
+	private void Awake()
 	{
-		if (Input.GetKeyDown(KeyCode.W))
-		{
-			QueueMovement(Vector3.forward);
-		}
-		if (Input.GetKeyDown(KeyCode.A))
-		{
-			QueueMovement(Vector3.left);
-		}
-		if (Input.GetKeyDown(KeyCode.S))
-		{
-			QueueMovement(Vector3.back);
-		}
-		if (Input.GetKeyDown(KeyCode.D))
-		{
-			QueueMovement(Vector3.right);
-		}
+		ic = GetComponent<InputController>();
+		movement = GetComponent<PlayerMovement>();
+		movement.Init(tc, ic);
 	}
 
-	private void QueueMovement(Vector3 delta)
+	public void CollectFireflies()
 	{
-		var hasQueuedMovements = targetPositions.Count > 0;
-		var previousTargetPos = hasQueuedMovements ? targetPositions.Last() : lastTargetPos;
-		var newTargetPos = previousTargetPos + delta;
-
-		if (tiles.IsTile(newTargetPos))
-		{
-			targetPositions.Enqueue(newTargetPos);
-			TryStartMovement();
-			lastTargetPos = newTargetPos;
-		}
+		hasFireflies = true;
 	}
 
-	private void TryStartMovement()
+	public void DepositFireflies()
 	{
-		if (movementRoutine == null && targetPositions.Count > 0)
-			movementRoutine = StartCoroutine(MoveToTarget());
+		hasFireflies = false;
 	}
 
-	private IEnumerator MoveToTarget()
-	{
-		var targetPos = targetPositions.Dequeue();
-
-		// TODO Smooth rotation
-		var dir = (targetPos - transform.position).normalized;
-		transform.rotation = Quaternion.LookRotation(dir);
-
-		while (Vector3.Distance(transform.position, targetPos) > 0.01f)
-		{
-			transform.position = Vector3.MoveTowards(transform.position, targetPos, movementSpeed * Time.deltaTime);
-			yield return null;
-		}
-		transform.position = targetPos;
-		movementRoutine = null;
-		TryStartMovement();
-	}
+	
 }
