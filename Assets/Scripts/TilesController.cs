@@ -27,9 +27,8 @@ public class TilesController : MonoBehaviour
 		var gridSizeX = maxX - minX;
 		var gridSizeZ = maxZ - minZ;
 		var gridSize = new Vector2Int((int)gridSizeX + 1, (int)gridSizeZ + 1);
-		var minCorner = new Vector2(minX, minZ);
-		var maxCorner = new Vector2(maxX, maxZ);
-		var origin = minCorner;
+		var origin = new Vector3(minX, 0f, minZ);
+		origin -= new Vector3(0.5f, 0f, 0.5f);
 		grid = new Grid<object>(gridSize, 1f, origin, true, false, (Vector2Int gridPos, Vector3 worldPos, int index) => new object());
 	}
 

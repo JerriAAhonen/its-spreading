@@ -16,8 +16,9 @@ public class PlayerMovement : MonoBehaviour
 	private Vector3 input = Vector3.zero;
 	private void Update()
 	{
-		input = ic.MovementInput;
-		
+		input = ic.MovementInput.normalized;
+		var roundedInput = new Vector3(Mathf.Round(input.x), 0f, Mathf.Round(input.z));
+		Debug.Log(roundedInput);
 	}
 
 	private void OnDrawGizmos()
