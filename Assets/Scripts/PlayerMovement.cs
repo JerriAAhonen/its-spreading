@@ -5,9 +5,9 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private float movementSpeed;
 
 	private TilesController tc;
-	private InputController ic;
+	private IInputController ic;
 
-	public void Init(TilesController tc, InputController ic)
+	public void Init(TilesController tc, IInputController ic)
 	{
 		this.tc = tc;
 		this.ic = ic;
@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
 		input = ic.MovementInput.normalized;
 		var roundedInput = new Vector3(Mathf.Round(input.x), 0f, Mathf.Round(input.z));
 		Debug.Log(roundedInput);
+
+		transform.position = Vector3.MoveTowards(transform.position, transform.position + roundedInput, movementSpeed * Time.deltaTime);
 	}
 
 	private void OnDrawGizmos()

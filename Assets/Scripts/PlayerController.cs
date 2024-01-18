@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
 	[SerializeField] private TilesController tc;
 
-	private InputController ic;
+	private IInputController ic;
 	private PlayerMovement movement;
 
 	private bool hasFireflies;
@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Awake()
 	{
-		ic = GetComponent<InputController>();
+		ic = GetComponent<IInputController>();
 		movement = GetComponent<PlayerMovement>();
 		movement.Init(tc, ic);
 	}
