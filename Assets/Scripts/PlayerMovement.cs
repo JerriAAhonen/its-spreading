@@ -16,11 +16,16 @@ public class PlayerMovement : MonoBehaviour
 	private Vector3 input = Vector3.zero;
 	private void Update()
 	{
-		input = ic.MovementInput.normalized;
-		var roundedInput = new Vector3(Mathf.Round(input.x), 0f, Mathf.Round(input.z));
-		Debug.Log(roundedInput);
+		input = ic.MovementInput;
+		if (input.Approximately(Vector3.zero)) return;
+		if (input.magnitude > 1f) input.Normalize();
 
-		transform.position = Vector3.MoveTowards(transform.position, transform.position + roundedInput, movementSpeed * Time.deltaTime);
+		var nextPos = Vector3.MoveTowards(transform.position, transform.position + input, movementSpeed * Time.deltaTime);
+
+		if (tc.IsWalkable(nextPos))
+		{
+			transform.position = nextPos;
+		}
 	}
 
 	private void OnDrawGizmos()
