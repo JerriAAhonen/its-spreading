@@ -37,7 +37,7 @@ namespace InfinityCode.ProjectContextActions.Actions
                 if (e.button == 0)
                 {
                     Selection.activeObject = asset;
-                    Material material = new Material(Shader.Find("Standard"));
+                    Material material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
                     material.mainTexture = asset as Texture2D;
                     ProjectWindowUtil.CreateAsset(material, asset.name + ".mat");
                 }
