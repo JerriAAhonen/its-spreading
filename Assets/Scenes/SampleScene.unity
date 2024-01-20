@@ -13375,6 +13375,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirefliesVFX
       objectReference: {fileID: 0}
+    - target: {fileID: 7566379522725941717, guid: 60515933cc315354d80122f87632d959,
+        type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7566379522725941717, guid: 60515933cc315354d80122f87632d959,
+        type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
