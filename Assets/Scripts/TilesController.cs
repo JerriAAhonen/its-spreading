@@ -14,6 +14,8 @@ public class TilesController : MonoBehaviour
 		}
 	}
 
+	[SerializeField] private bool DEBUG_showGridDebug;
+
 	private readonly HashSet<Vector3Int> tileCoords = new();
 
 	private Grid<TileObject> grid;
@@ -36,8 +38,17 @@ public class TilesController : MonoBehaviour
 
 		var gridSizeX = maxX - minX;
 		var gridSizeZ = maxZ - minZ;
+		
+		// Add 2 to extend the grid 1 tile further from the edges for border padding
+		gridSizeX += 2;
+		gridSizeZ += 2;
+
 		var gridSize = new Vector2Int((int)gridSizeX + 1, (int)gridSizeZ + 1);
 		var origin = new Vector3(minX, 0f, minZ);
+		
+		// Move the origin one tile back to take into account the the extra border padding
+		origin -= Vector3.one.With(y: 0f);
+		
 		var centerOffset = new Vector3(0.5f, 0f, 0.5f);
 		origin -= centerOffset;
 		grid = new Grid<TileObject>(gridSize, 1f, origin, true, true, (Vector2Int gridPos, Vector3 worldPos, int index) => new TileObject(tileCoords.Contains(worldPos.ToVector3Int())));
@@ -46,16 +57,22 @@ public class TilesController : MonoBehaviour
 
 	private void OnDrawGizmos()
 	{
-		grid?.OnDrawGizmos_DrawDebugData();
+		if (DEBUG_showGridDebug)
+			grid?.OnDrawGizmos_DrawDebugData();
 	}
 
 	public bool IsWalkable(Vector3 pos)
 	{
-		if (grid.GetValue(pos, out var tileObject))
+		if (grid.GetValue(pos, out var tileObject, true))
 		{
 			return tileObject.IsWalkable;
 		}
 
 		return false;
+	}
+	
+	public bool GetTileCenter(Vector3 worldPos, out Vector3 gridTileCenter)
+	{
+		return grid.GetGridAlignedPosition(worldPos, out gridTileCenter);
 	}
 }

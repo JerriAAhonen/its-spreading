@@ -18,14 +18,25 @@ public class PlayerMovement : MonoBehaviour
 	{
 		input = ic.MovementInput;
 		if (input.Approximately(Vector3.zero)) return;
-		if (input.magnitude > 1f) input.Normalize();
-
-		var nextPos = Vector3.MoveTowards(transform.position, transform.position + input, movementSpeed * Time.deltaTime);
-
-		if (tc.IsWalkable(nextPos))
+		if (input.magnitude > 0.5f)
 		{
-			transform.position = nextPos;
+			input.Normalize();
+			input *= 0.5f;
 		}
+
+		var nextPos = Vector3.MoveTowards(transform.position, transform.position + input, movementSpeed * Time.deltaTime * input.magnitude);
+
+		if (!tc.IsWalkable(nextPos))
+		{
+			if (tc.IsWalkable(nextPos.With(x: transform.position.x)))
+				nextPos = nextPos.With(x: transform.position.x);
+			else if (tc.IsWalkable(nextPos.With(z: transform.position.z)))
+				nextPos = nextPos.With(z: transform.position.z);
+			else
+				nextPos = transform.position;
+		}
+
+		transform.position = nextPos;
 	}
 
 	private void OnDrawGizmos()
