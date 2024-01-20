@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 91b51fb435a53e94585c7e71679c6bd0
+guid: 0a248c12f4508f9489158fbdfe49d363
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Tree_Color
-    second: {fileID: 2100000, guid: df41c7dcde7c01143b2df059a4ff45db, type: 2}
+      name: Glass
+    second: {fileID: 2100000, guid: ee930f95f663868478530d0f8c5e843d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: 52ed59f7ecb47254fb7a638e78e24b2d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 91b51fb435a53e94585c7e71679c6bd0
+guid: 3cac8ed782f5a3a41b83191d8ca752b8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Tree_Color
-    second: {fileID: 2100000, guid: df41c7dcde7c01143b2df059a4ff45db, type: 2}
+      name: Rock
+    second: {fileID: 2100000, guid: a94ff3023ade7214b8c6f60140f83642, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock_Tile
+    second: {fileID: 2100000, guid: 44e19d1d810f3d34e9f0fa36cab6c99b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
