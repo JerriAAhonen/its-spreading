@@ -55,7 +55,7 @@ public class Fireflies : Interactable
 			radial += radialDelta;
 
 			VelOverLifetime.radialMultiplier = radial;
-			Debug.Log(VelOverLifetime.radialMultiplier);
+			//Debug.Log(VelOverLifetime.radialMultiplier);
 
 			// Light
 			if (movingOutward)

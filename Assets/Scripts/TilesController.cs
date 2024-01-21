@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class TilesController : MonoBehaviour
 {
-	public class TileObject
+	public class TileData
 	{
 		public bool IsWalkable;
+		public bool CanPushObstacleInto;
 
-		public TileObject(bool isWalkable)
+		public TileData(bool isWalkable, bool canPushObstacleInto)
 		{
 			IsWalkable = isWalkable;
+			CanPushObstacleInto = canPushObstacleInto;
 		}
 	}
 
 	[SerializeField] private bool DEBUG_showGridDebug;
 
 	private readonly HashSet<Vector3Int> tileCoords = new();
+	private readonly Dictionary<Vector3Int, TileObject> tiles = new();
 
-	private Grid<TileObject> grid;
+	private Grid<TileData> grid;
 
 	private void Awake()
 	{
@@ -30,6 +33,9 @@ public class TilesController : MonoBehaviour
 		foreach (Transform t in transform)
 		{
 			tileCoords.Add(t.position.ToVector3Int());
+			tiles.Add(t.position.ToVector3Int(), t.gameObject.GetComponent<TileObject>());
+
+			// Calculate map bounds
 			if (t.position.x < minX) minX = t.position.x;
 			if (t.position.x > maxX) maxX = t.position.x;
 			if (t.position.z < minZ) minZ = t.position.z;
@@ -51,8 +57,19 @@ public class TilesController : MonoBehaviour
 		
 		var centerOffset = new Vector3(0.5f, 0f, 0.5f);
 		origin -= centerOffset;
-		grid = new Grid<TileObject>(gridSize, 1f, origin, true, true, (Vector2Int gridPos, Vector3 worldPos, int index) => new TileObject(tileCoords.Contains(worldPos.ToVector3Int())));
-		grid.SetDebugData((TileObject tileObj) => tileObj.IsWalkable ? "W" : "E");
+		grid = new Grid<TileData>(gridSize, 1f, origin, true, true, CreateTileData);
+		grid.SetDebugData((TileData data) => data.IsWalkable ? "W" : data.CanPushObstacleInto ? "C" : "E");
+	
+		TileData CreateTileData(Vector2Int gridPos, Vector3 worldPos, int index)
+		{
+			if (tiles.TryGetValue(worldPos.ToVector3Int(), out TileObject tileObj))
+			{
+				return new TileData(tileObj.IsWalkable, tileObj.CanPushObstacleInto);
+			}
+
+			return new TileData(false, false);
+
+		}
 	}
 
 	private void OnDrawGizmos()

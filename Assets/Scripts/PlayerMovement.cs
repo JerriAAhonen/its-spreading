@@ -20,9 +20,12 @@ public class PlayerMovement : MonoBehaviour
 		input = ic.MovementInput;
 		if (input.Approximately(Vector3.zero)) return;
 		if (input.magnitude > 1f) input.Normalize();
-		
-		var nextPos = Vector3.MoveTowards(transform.position, transform.position + input, movementSpeed * Time.deltaTime * input.magnitude);
 
+		// Calculate next position from input delta
+		var maxDistanceDelta = movementSpeed * Time.deltaTime * input.magnitude;
+		var nextPos = Vector3.MoveTowards(transform.position, transform.position + input, maxDistanceDelta);
+
+		// Check if player is moving into a walkable tile, if not, modify the nextPos vector so that it points to a walkable tile
 		if (!tc.IsWalkable(nextPos))
 		{
 			if (tc.IsWalkable(nextPos.With(x: transform.position.x)))
@@ -30,19 +33,30 @@ public class PlayerMovement : MonoBehaviour
 			else if (tc.IsWalkable(nextPos.With(z: transform.position.z)))
 				nextPos = nextPos.With(z: transform.position.z);
 			else
-				nextPos = transform.position;
+				nextPos = transform.position; // Don't move, there's nowhere to go in the input direction
 		}
 
+		// Rotate and move the player towards movement dir
 		var dir = (nextPos - transform.position).normalized;
-		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), rotationSpeed * Time.deltaTime);
+		transform.SetPositionAndRotation(
+			nextPos, 
+			Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), rotationSpeed * Time.deltaTime));
 
-		transform.position = nextPos;
+		// Pushing interaction
+		if (Physics.Raycast(transform.position + Vector3.up * 0.25f, transform.forward, out var hit, 0.25f))
+		{
+			if (hit.collider.gameObject.TryGetComponent(out Obstacle obstacle))
+			{
+				obstacle.Push(transform.position, maxDistanceDelta);
+			}
+		}
+
 	}
 
 	private void OnDrawGizmos()
 	{
 		
-		Gizmos.DrawSphere(transform.position + input, 0.2f);
+		//Gizmos.DrawSphere(transform.position + input, 0.2f);
 	}
 
 	// From tile to tile, Turn based

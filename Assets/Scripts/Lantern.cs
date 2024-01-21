@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 public class Lantern : Interactable
@@ -35,5 +36,17 @@ public class Lantern : Interactable
 			{
 				lampMat1, activeMat
 			};
+	}
+
+	[Button]
+	private void EDITOR_Toggle()
+	{
+		var mats = lampRenderer.sharedMaterials;
+		if (mats[1] == activeMat)
+			mats[1] = deactiveMat;
+		else
+			mats[1] = activeMat;
+
+		lampRenderer.sharedMaterials = mats;
 	}
 }

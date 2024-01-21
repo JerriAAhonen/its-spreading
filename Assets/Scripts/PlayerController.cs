@@ -9,16 +9,19 @@ public class PlayerController : MonoBehaviour
 
 	private IInputController ic;
 	private PlayerMovement movement;
+	private CapsuleCollider capsuleCollider;
 
 	private bool hasFireflies;
 
 	public bool HasFireflies => hasFireflies;
+	public float Width => capsuleCollider.radius * 2f;
 
 	private void Awake()
 	{
 		ic = GetComponent<IInputController>();
 		movement = GetComponent<PlayerMovement>();
 		movement.Init(tc, ic);
+		capsuleCollider = GetComponent<CapsuleCollider>();
 	}
 
 	public void CollectFireflies()
@@ -31,5 +34,8 @@ public class PlayerController : MonoBehaviour
 		hasFireflies = false;
 	}
 
-	
+	public void CollideWithEnemy()
+	{
+		Debug.Log("Dead");
+	}
 }
