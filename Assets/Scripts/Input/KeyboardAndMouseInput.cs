@@ -1,10 +1,5 @@
 ﻿using UnityEngine;
 
-public interface IInputController
-{
-	public Vector3 MovementInput { get; }
-}
-
 public class KeyboardAndMouseInput : MonoBehaviour, IInputController
 {
 	public Vector3 MovementInput { get; private set; }
