@@ -3,6 +3,7 @@
 public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField] private float movementSpeed;
+	[SerializeField] private float rotationSpeed;
 
 	private TilesController tc;
 	private IInputController ic;
@@ -18,12 +19,8 @@ public class PlayerMovement : MonoBehaviour
 	{
 		input = ic.MovementInput;
 		if (input.Approximately(Vector3.zero)) return;
-		if (input.magnitude > 0.5f)
-		{
-			input.Normalize();
-			input *= 0.5f;
-		}
-
+		if (input.magnitude > 1f) input.Normalize();
+		
 		var nextPos = Vector3.MoveTowards(transform.position, transform.position + input, movementSpeed * Time.deltaTime * input.magnitude);
 
 		if (!tc.IsWalkable(nextPos))
@@ -35,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
 			else
 				nextPos = transform.position;
 		}
+
+		var dir = (nextPos - transform.position).normalized;
+		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), rotationSpeed * Time.deltaTime);
 
 		transform.position = nextPos;
 	}

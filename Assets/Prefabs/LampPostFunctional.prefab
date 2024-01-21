@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 2111429054306307059}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!65 &6498788001411919266
 BoxCollider:
@@ -67,9 +67,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296e89364ca4510479916303ee5d4dcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lampRenderer: {fileID: 8668862837587720545}
-  activeMat: {fileID: 2100000, guid: 9a732e5f349660840987115f7e78f7ae, type: 2}
-  deactiveMat: {fileID: 2100000, guid: 469c5fb1c41337745ab2879c442371e9, type: 2}
+  lampRenderer: {fileID: 5561842333198568740}
+  activeMat: {fileID: 2100000, guid: ee930f95f663868478530d0f8c5e843d, type: 2}
+  deactiveMat: {fileID: 2100000, guid: c7827ec6f53999840a9ee21bd90f5b2d, type: 2}
 --- !u!1001 &492414595062692820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -149,9 +149,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 492414595062692820}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &8668862837587720545 stripped
+--- !u!23 &5561842333198568740 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 9122204482265793205, guid: 240ed8b5031fb3344ad9cae622f2e37a,
+  m_CorrespondingSourceObject: {fileID: 5474910764716930800, guid: 240ed8b5031fb3344ad9cae622f2e37a,
     type: 3}
   m_PrefabInstance: {fileID: 492414595062692820}
   m_PrefabAsset: {fileID: 0}
