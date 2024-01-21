@@ -7,7 +7,12 @@ public class Obstacle : MonoBehaviour
 	[SerializeField] private Outline outline;
 	//[SerializeField] private ;
 
-	public bool Push(Vector3 pushedFrom, float maxDistanceDelta)
+	private void Awake()
+	{
+		outline.OutlineWidth = 0f;
+	}
+
+	public bool Push(Vector3 pushedFrom, float maxDistanceDelta, TilesController tc)
 	{
 		outline.OutlineWidth = 2f;
 
@@ -16,9 +21,19 @@ public class Obstacle : MonoBehaviour
 		dir.z = Mathf.RoundToInt(dir.z);
 		dir.y = 0f;
 
-		transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, maxDistanceDelta);
+		var targetPos = transform.position + dir;
+		if (tc.CanPushObstacleInto(targetPos))
+		{
+			transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, maxDistanceDelta);
+			return true;
+		}
+		else
+			return false;
+	}
 
-		return true;
+	public void StopPushing()
+	{
+		outline.OutlineWidth = 0f;
 	}
 }
 

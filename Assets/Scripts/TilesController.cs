@@ -87,6 +87,16 @@ public class TilesController : MonoBehaviour
 
 		return false;
 	}
+
+	public bool CanPushObstacleInto(Vector3 pos)
+	{
+		if (grid.GetValue(pos, out var tileObject, true))
+		{
+			return tileObject.CanPushObstacleInto;
+		}
+
+		return false;
+	}
 	
 	public bool GetTileCenter(Vector3 worldPos, out Vector3 gridTileCenter)
 	{
