@@ -606,6 +606,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 448586196}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &448586198 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5933251186709526237, guid: 9089aed517e8c1e46acdab359356f871,
+    type: 3}
+  m_PrefabInstance: {fileID: 448586196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cafcc149396a649b758d388f09c6f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &475756121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -778,6 +790,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 475756123}
   level: {fileID: 210009340}
+  settings: {fileID: 448586198}
 --- !u!4 &526450780
 Transform:
   m_ObjectHideFlags: 0
@@ -6435,7 +6448,7 @@ PrefabInstance:
     - target: {fileID: 6353511048195302208, guid: e4c48dea7bd82ab4a875f10475e60764,
         type: 3}
       propertyPath: m_Name
-      value: Levels
+      value: LevelSelection
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

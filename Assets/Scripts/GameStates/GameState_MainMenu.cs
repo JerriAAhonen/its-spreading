@@ -18,6 +18,8 @@ public class GameState_MainMenu : GameState
 		exit.OnClick += OnExitGame;
 	}
 
+	#region GameState
+
 	public override void Enter() 
 	{ 
 		gameObject.SetActive(true);
@@ -27,6 +29,8 @@ public class GameState_MainMenu : GameState
 	{
 		gameObject.SetActive(false);
 	}
+
+	#endregion
 
 	private void OnStartGame()
 	{
@@ -42,6 +46,7 @@ public class GameState_MainMenu : GameState
 	private void OnSettings()
 	{
 		Debug.Log("OnSettings");
+		manager.Transition(GameStateType.Settings);
 	}
 
 	private void OnExitGame()

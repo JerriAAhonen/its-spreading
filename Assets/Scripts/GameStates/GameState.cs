@@ -7,6 +7,7 @@ public abstract class GameState : MonoBehaviour
 	public GameState Init(GameStateManager manager)
 	{
 		this.manager = manager;
+		gameObject.SetActive(false);
 		return this;
 	}
 

@@ -148,8 +148,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 72.33426, y: 0}
-  m_SizeDelta: {x: 154.6668, y: 0}
+  m_AnchoredPosition: {x: 5.2981, y: 0}
+  m_SizeDelta: {x: 20.5944, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3004014876312552476
 CanvasRenderer:
@@ -572,8 +572,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 72.33426, y: 0}
-  m_SizeDelta: {x: 154.6668, y: 0}
+  m_AnchoredPosition: {x: 5.2981, y: 0}
+  m_SizeDelta: {x: 20.5944, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2009345618703985652
 CanvasRenderer:
@@ -703,7 +703,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5933251186709526237}
+        m_TargetAssemblyTypeName: GameState_Settings, Assembly-CSharp
+        m_MethodName: OnMusicVolumeChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4373942251071793648
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,6 +898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4980384861882455280}
+  - component: {fileID: 5933251186709526237}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -921,6 +934,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5933251186709526237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5451714978210035833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cafcc149396a649b758d388f09c6f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 8358747799360203615}
+  sound: {fileID: 8004107835744147489}
+  back: {fileID: 264338774867244702}
 --- !u!1 &5563970099891256174
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,13 +1599,25 @@ PrefabInstance:
     - target: {fileID: 8946394183931690828, guid: 5bab2f9101002804c9c7b0ba3291cd7f,
         type: 3}
       propertyPath: m_Name
-      value: UIButton
+      value: UIButton-Back
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bab2f9101002804c9c7b0ba3291cd7f, type: 3}
+--- !u!114 &264338774867244702 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5118575838331686568, guid: 5bab2f9101002804c9c7b0ba3291cd7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 4946020206158460982}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a7558daae878654793afed50825879c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3768530500476290665 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8137804046475460191, guid: 5bab2f9101002804c9c7b0ba3291cd7f,
