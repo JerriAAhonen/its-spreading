@@ -57,8 +57,8 @@ public class TilesController : MonoBehaviour
 		
 		var centerOffset = new Vector3(0.5f, 0f, 0.5f);
 		origin -= centerOffset;
-		grid = new Grid<TileData>(gridSize, 1f, origin, true, true, CreateTileData);
-		grid.SetDebugData((TileData data) => data.IsWalkable ? "W" : data.CanPushObstacleInto ? "C" : "E");
+		grid = new Grid<TileData>(gridSize, 1f, origin, true, DEBUG_showGridDebug, CreateTileData);
+		if (DEBUG_showGridDebug) grid.SetDebugData((TileData data) => data.IsWalkable ? "W" : data.CanPushObstacleInto ? "C" : "E");
 	
 		TileData CreateTileData(Vector2Int gridPos, Vector3 worldPos, int index)
 		{
