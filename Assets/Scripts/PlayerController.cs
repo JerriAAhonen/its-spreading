@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -17,6 +15,8 @@ public class PlayerController : MonoBehaviour
 
 	public bool HasFireflies => hasFireflies;
 	public float Width => capsuleCollider.radius * 2f;
+
+	public event Action Die;
 
 	private void Awake()
 	{
@@ -39,5 +39,6 @@ public class PlayerController : MonoBehaviour
 	public void CollideWithEnemy()
 	{
 		Debug.Log("Dead");
+		Die?.Invoke();
 	}
 }

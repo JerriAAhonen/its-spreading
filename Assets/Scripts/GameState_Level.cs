@@ -7,7 +7,8 @@ public class GameState_Level : GameState
 	public override void Enter()
 	{
 		// TODO: Load level
-		levelInstance = Instantiate(LevelDatabase.Get().GetLevel(manager.CurrentLevelIndex));
+		var levelController = LevelDatabase.Get().GetLevel(manager.CurrentLevelIndex);
+		levelInstance = Instantiate(levelController.gameObject);
 		levelInstance.transform.SetParent(transform);
 	}
 

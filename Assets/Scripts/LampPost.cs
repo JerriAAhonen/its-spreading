@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using NaughtyAttributes;
 using UnityEngine;
 
-public class Lantern : Interactable
+public class LampPost : Interactable
 {
 	[SerializeField] private MeshRenderer lampRenderer;
 	[SerializeField] private Material activeMat;
@@ -12,6 +11,9 @@ public class Lantern : Interactable
 	private bool active;
 	private Material lampMat1;
 	private Material lampMat2;
+
+	public bool IsLit => active;
+	public event Action Lit;
 
 	private void Awake()
 	{
@@ -36,6 +38,8 @@ public class Lantern : Interactable
 			{
 				lampMat1, activeMat
 			};
+
+		Lit?.Invoke();
 	}
 
 	[Button]

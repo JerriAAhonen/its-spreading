@@ -180,6 +180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1971357269255914045}
+  - component: {fileID: 6026831872892102860}
   m_Layer: 0
   m_Name: Level1
   m_TagString: Untagged
@@ -209,6 +210,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6026831872892102860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681046863073457959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01089fb1258c55a4a9f70cc554c01fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4340425890886407488
 GameObject:
   m_ObjectHideFlags: 0
@@ -5498,16 +5511,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5561842333198568740, guid: c340868c1a8db054f88156f756c1422d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5561842333198568740, guid: c340868c1a8db054f88156f756c1422d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: ee930f95f663868478530d0f8c5e843d, type: 2}
     - target: {fileID: 8258458049303645314, guid: c340868c1a8db054f88156f756c1422d,
         type: 3}
       propertyPath: m_Name

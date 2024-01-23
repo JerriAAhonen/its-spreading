@@ -26,14 +26,6 @@ public class GameStateManager : Singleton<GameStateManager>
 		Transition(GameStateType.MainMenu);
 	}
 
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			Transition(GameStateType.Level);
-		}
-	}
-
 	public void Transition(GameStateType newType)
 	{
 		if (states.Count > 0)

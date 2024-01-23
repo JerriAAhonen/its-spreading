@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6498788001411919266}
   - component: {fileID: 2524426924645440355}
   m_Layer: 0
-  m_Name: LampPostFunctional
+  m_Name: LampPost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,7 +136,7 @@ PrefabInstance:
     - target: {fileID: 7670475773310239247, guid: 240ed8b5031fb3344ad9cae622f2e37a,
         type: 3}
       propertyPath: m_Name
-      value: LampPost
+      value: LampPostProp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

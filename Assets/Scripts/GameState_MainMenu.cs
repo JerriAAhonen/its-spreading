@@ -5,6 +5,18 @@ using UnityEngine;
 
 public class GameState_MainMenu : GameState
 {
+	[SerializeField] private MenuButton startGame;
+	[SerializeField] private MenuButton levels;
+	[SerializeField] private MenuButton settings;
+	[SerializeField] private MenuButton exit;
+
+	private void Awake()
+	{
+		startGame.OnClick += OnStartGame;
+		levels.OnClick += OnLevels;
+		settings.OnClick += OnSettings;
+		exit.OnClick += OnExitGame;
+	}
 
 	public override void Enter() 
 	{ 
@@ -16,8 +28,25 @@ public class GameState_MainMenu : GameState
 		gameObject.SetActive(false);
 	}
 
-	private void Quit()
+	private void OnStartGame()
 	{
+		Debug.Log("OnStartGame");
+		manager.Transition(GameStateType.Level);
+	}
+
+	private void OnLevels()
+	{
+		Debug.Log("OnLevels");
+	}
+
+	private void OnSettings()
+	{
+		Debug.Log("OnSettings");
+	}
+
+	private void OnExitGame()
+	{
+		Debug.Log("OnExit");
 #if UNITY_EDITOR
 		if (EditorApplication.isPlaying)
 		{

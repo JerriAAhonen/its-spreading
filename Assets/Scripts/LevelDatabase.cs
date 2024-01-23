@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class LevelDatabase : ScriptableObject
 {
-	[SerializeField] private List<GameObject> levels;
+	[SerializeField] private List<LevelController> levels;
 
-	public GameObject GetLevel(int index)
+	public LevelController GetLevel(int index)
 	{
 		if (index > levels.Count - 1)
 		{
