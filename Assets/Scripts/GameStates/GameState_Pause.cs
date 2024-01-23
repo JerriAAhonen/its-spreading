@@ -32,6 +32,7 @@ public class GameState_Pause : GameState
 
 	private void OnContinue()
 	{
+		GameState_Level.ResumeTime();
 		manager.CloseTopState();
 	}
 
@@ -42,6 +43,7 @@ public class GameState_Pause : GameState
 
 	private void OnMainMenu()
 	{
+		GameState_Level.ResumeTime();
 		manager.Transition(GameStateType.MainMenu);
 	}
 }

@@ -4994,7 +4994,7 @@ Transform:
   - {fileID: 5713517324894175823}
   - {fileID: 5962286160293726242}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5441330247477906841
 MonoBehaviour:
@@ -5023,6 +5023,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 80
   rotationSpeed: 10
+  model: {fileID: 140263663064507093}
+  animationSpeed: 8
+  animationHeightMult: 0.1
 --- !u!114 &8604148268966949114
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,12 +18,14 @@ public class GameState_Level : GameState
 	{
 		gameObject.SetActive(true);
 
-		levelController = LevelDatabase.Get().GetLevel(manager.CurrentLevelIndex);
+		levelInstance = Instantiate(LevelDatabase.Get().GetLevel(manager.CurrentLevelIndex).gameObject);
+		levelInstance.transform.SetParent(transform);
+		
+		levelController = levelInstance.GetComponent<LevelController>();
 		levelController.LevelFailed += OnLevelFailed;
 		levelController.LevelCompleted += OnLevelCompleted;
 
-		levelInstance = Instantiate(levelController.gameObject);
-		levelInstance.transform.SetParent(transform);
+		ResumeTime();
 	}
 
 	public override void Exit()
@@ -37,18 +39,36 @@ public class GameState_Level : GameState
 	private void OnPause()
 	{
 		if (manager.IsStateOpen<GameState_Pause>())
+		{
 			manager.CloseTopState();
+			ResumeTime();
+		}
 		else
+		{
+			StopTime();
 			manager.OpenAdditive(GameStateType.Pause);
+		}
 	}
 
 	private void OnLevelFailed()
 	{
+		StopTime();
 		manager.OpenAdditive(GameStateType.GameOver);
 	}
 
 	private void OnLevelCompleted()
 	{
+		StopTime();
 		manager.OnLevelCompleted();
+	}
+
+	public static void StopTime()
+	{
+		Time.timeScale = 0f;
+	}
+
+	public static void ResumeTime()
+	{
+		Time.timeScale = 1f;
 	}
 }

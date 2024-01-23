@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 	{
 		ic = GetComponent<IInputController>();
 		movement = GetComponent<PlayerMovement>();
-		movement.Init(tc, ic);
+		movement.Init(ic);
 		capsuleCollider = GetComponent<CapsuleCollider>();
 	}
 
