@@ -792,7 +792,7 @@ MonoBehaviour:
   levelSelection: {fileID: 7125480527715966272}
   settings: {fileID: 448586198}
   level: {fileID: 210009340}
-  pause: {fileID: 0}
+  pause: {fileID: 870141578}
   gameOver: {fileID: 1407675881}
 --- !u!4 &526450780
 Transform:
@@ -1096,6 +1096,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8986963054920025424}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &870141578 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1591938804845437686, guid: 4532abc676ddde643a9887d1371cb95f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8986963054920025424}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bace91343cc06794c86c6defd73f7536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1199517053
 GameObject:
   m_ObjectHideFlags: 0
