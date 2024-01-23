@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ public class LevelController : MonoBehaviour
 {
 	private PlayerController player;
 	private LampPost[] lampPosts;
+
+	public event Action LevelFailed;
+	public event Action LevelCompleted;
 
 	private void Awake()
 	{
@@ -19,6 +23,7 @@ public class LevelController : MonoBehaviour
 	private void OnPlayerDied()
 	{
 		Debug.Log("Player Died");
+		LevelFailed?.Invoke();
 	}
 
 	private void OnLampLit()
@@ -26,6 +31,7 @@ public class LevelController : MonoBehaviour
 		if (AllLampsLit())
 		{
 			Debug.Log("All lamps lit");
+			LevelCompleted?.Invoke();
 		}
 	}
 

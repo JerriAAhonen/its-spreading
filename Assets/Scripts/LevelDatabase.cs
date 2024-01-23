@@ -7,6 +7,8 @@ public class LevelDatabase : ScriptableObject
 {
 	[SerializeField] private List<LevelController> levels;
 
+	public int MaxLevelIndex => levels.Count - 1;
+
 	public LevelController GetLevel(int index)
 	{
 		if (index > levels.Count - 1)

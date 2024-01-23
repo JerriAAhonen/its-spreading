@@ -3,6 +3,7 @@
 public abstract class GameState : MonoBehaviour
 {
 	protected GameStateManager manager;
+	protected bool openedAdditively;
 
 	public GameState Init(GameStateManager manager)
 	{
@@ -13,4 +14,9 @@ public abstract class GameState : MonoBehaviour
 
 	public virtual void Enter() { }
 	public virtual void Exit() { }
+
+	public void SetOpendedAdditively(bool additively)
+	{
+		openedAdditively = additively;
+	}
 }

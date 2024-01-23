@@ -39,7 +39,6 @@ public class GameState_Settings : GameState
 	public override void Exit()
 	{
 		gameObject.SetActive(false);
-		// Save sound settings
 
 		PlayerPrefs.SetFloat(MusicVolKey, music.value);
 		PlayerPrefs.SetFloat(SoundVolKey, sound.value);
@@ -59,6 +58,9 @@ public class GameState_Settings : GameState
 
 	public void OnBack()
 	{
-		manager.Transition(GameStateType.MainMenu);
+        if (openedAdditively)
+			manager.CloseTopState();
+		else
+			manager.Transition(GameStateType.MainMenu);
 	}
 }

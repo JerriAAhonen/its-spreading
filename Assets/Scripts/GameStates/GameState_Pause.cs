@@ -1,7 +1,18 @@
-﻿#if UNITY_EDITOR
-#endif
+﻿using UnityEngine;
+
 public class GameState_Pause : GameState
 {
+	[SerializeField] private MenuButton continu;
+	[SerializeField] private MenuButton settings;
+	[SerializeField] private MenuButton mainMenu;
+
+	private void Awake()
+	{
+		continu.OnClick += OnContinue;
+		settings.OnClick += OnSettings;
+		mainMenu.OnClick += OnMainMenu;
+	}
+
 	#region GameState
 
 	public override void Enter()
@@ -18,4 +29,19 @@ public class GameState_Pause : GameState
 	}
 
 	#endregion
+
+	private void OnContinue()
+	{
+		manager.CloseTopState();
+	}
+
+	private void OnSettings()
+	{
+		manager.OpenAdditive(GameStateType.Settings);
+	}
+
+	private void OnMainMenu()
+	{
+		manager.Transition(GameStateType.MainMenu);
+	}
 }

@@ -41,6 +41,7 @@ public class GameState_MainMenu : GameState
 	private void OnLevels()
 	{
 		Debug.Log("OnLevels");
+		manager.Transition(GameStateType.LevelSelection);
 	}
 
 	private void OnSettings()

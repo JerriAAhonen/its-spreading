@@ -16,7 +16,7 @@ public class GameStateManager : Singleton<GameStateManager>
 
 	private readonly Stack<GameState> states = new();
 
-	public int CurrentLevelIndex { get; private set; }
+	public int CurrentLevelIndex { get; set; }
 
 	protected override void Awake()
 	{
@@ -34,9 +34,10 @@ public class GameStateManager : Singleton<GameStateManager>
 
 	public void Transition(GameStateType newType)
 	{
-		if (states.Count > 0) 
+		while (states.Count > 0) 
 		{
 			states.Peek().Exit();
+			states.Peek().SetOpendedAdditively(false);
 			states.Pop();
 		}
 
@@ -50,6 +51,7 @@ public class GameStateManager : Singleton<GameStateManager>
 		var state = GetState(additiveType);
 		states.Push(state);
 		state.Enter();
+		state.SetOpendedAdditively(true);
 	}
 
 	public void CloseTopState()
@@ -57,8 +59,33 @@ public class GameStateManager : Singleton<GameStateManager>
 		if (states.Count > 0)
 		{
 			states.Peek().Exit();
+			states.Peek().SetOpendedAdditively(false);
 			states.Pop();
 		}
+	}
+
+	public bool IsStateOpen<T>() where T : GameState
+	{
+		foreach (var state in states)
+			if (state is T)
+				return true;
+		return false;
+	}
+
+	public void OnLevelCompleted()
+	{
+		SaveDataManager.SetLevelCompleted(CurrentLevelIndex);
+
+		CurrentLevelIndex++;
+		if (CurrentLevelIndex > LevelDatabase.Get().MaxLevelIndex)
+		{
+			Debug.Log("Last level completed, thanks for playing!");
+			Transition(GameStateType.MainMenu);
+			// TODO: Transition to Thanks for Playing screen
+			return;
+		}
+
+		Transition(GameStateType.Level);
 	}
 
 	private GameState GetState(GameStateType type)
