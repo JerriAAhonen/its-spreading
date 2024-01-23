@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum TileType
 {
-	Grass, Water, Obstructed
+	Empty, Solid, Water, Obstructed
 }
 
 [DefaultExecutionOrder(-99)]
@@ -13,8 +13,7 @@ public class TileObject : MonoBehaviour
 	[SerializeField] private GameObject grass;
 	[SerializeField] private GameObject water;
 
-	public bool IsWalkable => type == TileType.Grass;
-	public bool CanPushObstacleInto => type == TileType.Water;
+	public TileType Type => type;
 	public Vector3Int WorldPos { get; private set; }
 
 	private void Awake()
@@ -25,7 +24,7 @@ public class TileObject : MonoBehaviour
 	[Button]
 	private void EDITOR_SetGrass()
 	{
-		type = TileType.Grass;
+		type = TileType.Solid;
 		grass.SetActive(true);
 		water.SetActive(false);
 	}

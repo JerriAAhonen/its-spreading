@@ -4,36 +4,51 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
+	[SerializeField] private LayerMask playerLayer;
 	[SerializeField] private Outline outline;
 	//[SerializeField] private ;
+
+	private Rigidbody rb;
+
+	private bool lockedInPlace; // Is the obstacle pushed into a waterTile?
 
 	private void Awake()
 	{
 		outline.OutlineWidth = 0f;
+		//rb = GetComponent<Rigidbody>();
 	}
 
-	public bool Push(Vector3 pushedFrom, float maxDistanceDelta, TilesController tc)
+	private void OnCollisionEnter(Collision collision)
 	{
-		outline.OutlineWidth = 2f;
+		if (lockedInPlace) return;
 
-		var dir = transform.position - pushedFrom;
-		dir.x = Mathf.RoundToInt(dir.x);
-		dir.z = Mathf.RoundToInt(dir.z);
-		dir.y = 0f;
-
-		var targetPos = transform.position + dir;
-		if (tc.CanPushObstacleInto(targetPos))
+		if (BitMaskUtil.MaskContainsLayer(playerLayer, collision.collider.gameObject.layer))
 		{
-			transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, maxDistanceDelta);
-			return true;
-		}
-		else
-			return false;
-	}
+			Debug.Log("Hit player");
+			var tc = collision.collider.gameObject.GetComponent<PlayerController>().TilesController;
 
-	public void StopPushing()
-	{
-		outline.OutlineWidth = 0f;
+			var pushedFrom = collision.collider.transform.position;
+			var dir = transform.position - pushedFrom;
+			dir.x = Mathf.RoundToInt(dir.x);
+			dir.z = Mathf.RoundToInt(dir.z);
+			dir.y = 0f;
+
+			var targetPos = transform.position + dir;
+			if (tc.CanPushObstacleInto(targetPos, out var isWater))
+			{
+				targetPos = isWater 
+					? targetPos.With(y:0f) 
+					: targetPos;
+				transform.position = targetPos;
+
+				if (isWater)
+				{
+					// Update tiles colliders
+					tc.RemoveCollider(targetPos);
+					lockedInPlace = true;
+				}
+			}
+		}
 	}
 }
 

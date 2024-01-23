@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
 	private bool hasFireflies;
 
+	public TilesController TilesController => tc;
+
 	public bool HasFireflies => hasFireflies;
 	public float Width => capsuleCollider.radius * 2f;
 

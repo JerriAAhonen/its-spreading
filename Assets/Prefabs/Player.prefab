@@ -4968,8 +4968,7 @@ GameObject:
   - component: {fileID: 6882540921336665587}
   - component: {fileID: 676978523129574639}
   - component: {fileID: 8604148268966949114}
-  - component: {fileID: 7700002041162232796}
-  - component: {fileID: 4079473049273143142}
+  - component: {fileID: 6365690359755361563}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -4994,7 +4993,7 @@ Transform:
   - {fileID: 5713517324894175823}
   - {fileID: 5962286160293726242}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5441330247477906841
 MonoBehaviour:
@@ -5021,7 +5020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8667fdc8f38af04084bc398798e3c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 2
+  movementSpeed: 100
   rotationSpeed: 10
 --- !u!114 &676978523129574639
 MonoBehaviour:
@@ -5048,8 +5047,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64d4e1a819929f46acd90a87cdfcc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &7700002041162232796
-CapsuleCollider:
+--- !u!143 &6365690359755361563
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5066,38 +5065,14 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.15
+  serializedVersion: 3
   m_Height: 0.6
-  m_Direction: 1
+  m_Radius: 0.13
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.01
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.3, z: 0}
---- !u!54 &4079473049273143142
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8631664287777311908}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &466378144424101182
 PrefabInstance:
   m_ObjectHideFlags: 0

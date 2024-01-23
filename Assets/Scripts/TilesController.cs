@@ -6,13 +6,13 @@ public class TilesController : MonoBehaviour
 {
 	public class TileData
 	{
-		public bool IsWalkable;
-		public bool CanPushObstacleInto;
+		public TileType TileType;
+		public Vector3 WorldPos;
 
-		public TileData(bool isWalkable, bool canPushObstacleInto)
+		public TileData(TileType type, Vector3 worldPos)
 		{
-			IsWalkable = isWalkable;
-			CanPushObstacleInto = canPushObstacleInto;
+			TileType = type;
+			WorldPos = worldPos;
 		}
 	}
 
@@ -20,6 +20,7 @@ public class TilesController : MonoBehaviour
 
 	private readonly HashSet<Vector3Int> tileCoords = new();
 	private readonly Dictionary<Vector3Int, TileObject> tiles = new();
+	private readonly Dictionary<Vector3Int, Collider> colliders = new();
 
 	private Grid<TileData> grid;
 
@@ -44,31 +45,80 @@ public class TilesController : MonoBehaviour
 
 		var gridSizeX = maxX - minX;
 		var gridSizeZ = maxZ - minZ;
-		
+
 		// Add 2 to extend the grid 1 tile further from the edges for border padding
 		gridSizeX += 2;
 		gridSizeZ += 2;
 
 		var gridSize = new Vector2Int((int)gridSizeX + 1, (int)gridSizeZ + 1);
 		var origin = new Vector3(minX, 0f, minZ);
-		
+
 		// Move the origin one tile back to take into account the the extra border padding
 		origin -= Vector3.one.With(y: 0f);
-		
+
 		var centerOffset = new Vector3(0.5f, 0f, 0.5f);
 		origin -= centerOffset;
 		grid = new Grid<TileData>(gridSize, 1f, origin, true, DEBUG_showGridDebug, CreateTileData);
-		if (DEBUG_showGridDebug) grid.SetDebugData((TileData data) => data.IsWalkable ? "W" : data.CanPushObstacleInto ? "C" : "E");
-	
+		GenerateColliders();
+
+		#region GRID_DEBUG
+
+		if (DEBUG_showGridDebug)
+		{
+			grid.SetDebugData((TileData data) =>
+			{
+				return data.TileType switch
+				{
+					TileType.Empty => "E",
+					TileType.Solid => "S",
+					TileType.Water => "W",
+					TileType.Obstructed => "O",
+					_ => throw new System.NotImplementedException(),
+				};
+			});
+		}
+
+		#endregion
+
 		TileData CreateTileData(Vector2Int gridPos, Vector3 worldPos, int index)
 		{
 			if (tiles.TryGetValue(worldPos.ToVector3Int(), out TileObject tileObj))
 			{
-				return new TileData(tileObj.IsWalkable, tileObj.CanPushObstacleInto);
+				return new TileData(tileObj.Type, worldPos);
 			}
 
-			return new TileData(false, false);
+			return new TileData(TileType.Empty, worldPos);
+		}
 
+		void GenerateColliders()
+		{
+			foreach (TileData data in grid)
+			{
+				switch (data.TileType)
+				{
+					case TileType.Empty:
+					case TileType.Obstructed:
+						// Create collider for player
+						// Create collider for obstacle
+						var colGo = new GameObject("Collider");
+						colGo.transform.parent = transform;
+						colGo.transform.position = data.WorldPos;
+						var col = colGo.AddComponent<BoxCollider>();
+						colliders.Add(data.WorldPos.ToVector3Int(), col);
+						break;
+					case TileType.Solid: 
+						break;
+					case TileType.Water:
+						// Create collider for player
+						colGo = new GameObject("Collider");
+						colGo.transform.parent = transform;
+						colGo.transform.position = data.WorldPos;
+						colGo.layer = 10;
+						col = colGo.AddComponent<BoxCollider>();
+						colliders.Add(data.WorldPos.ToVector3Int(), col);
+						break;
+				}
+			}
 		}
 	}
 
@@ -78,23 +128,23 @@ public class TilesController : MonoBehaviour
 			grid?.OnDrawGizmos_DrawDebugData();
 	}
 
-	public bool IsWalkable(Vector3 pos)
+	public void RemoveCollider(Vector3 worldPos)
 	{
-		if (grid.GetValue(pos, out var tileObject, true))
+		if (colliders.TryGetValue(worldPos.ToVector3Int(), out var col))
 		{
-			return tileObject.IsWalkable;
+			col.gameObject.SetActive(false);
 		}
-
-		return false;
 	}
 
-	public bool CanPushObstacleInto(Vector3 pos)
+	public bool CanPushObstacleInto(Vector3 pos, out bool isWater)
 	{
 		if (grid.GetValue(pos, out var tileObject, true))
 		{
-			return tileObject.CanPushObstacleInto;
+			isWater = tileObject.TileType == TileType.Water;
+			return tileObject.TileType is TileType.Water or TileType.Solid;
 		}
 
+		isWater = false;
 		return false;
 	}
 	
