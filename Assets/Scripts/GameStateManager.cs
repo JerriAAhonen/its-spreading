@@ -5,66 +5,56 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
-public enum GameState
-{
-	MainMenu,
-	LevelSelection,
-	Settings,
-	InLevel
-}
+public enum GameStateType { MainMenu, Settings, Level }
 
 public class GameStateManager : Singleton<GameStateManager>
 {
-	private GameObject levelInstance;
+	[SerializeField] private GameState_MainMenu mainMenu;
+	[SerializeField] private GameState_Level level;
+
+	private readonly Stack<GameState> states = new();
+
+	public int CurrentLevelIndex { get; private set; }
 
 	protected override void Awake()
 	{
 		base.Awake();
-		OpenMainMenu();
+
+		mainMenu.Init(this);
+		level.Init(this);
+
+		Transition(GameStateType.MainMenu);
 	}
 
-	public void OpenMainMenu()
+	private void Update()
 	{
-
-	}
-
-	public void StartLevel()
-	{
-		var levelIndex = SaveDataManager.GetNextLevelIndex();
-		var levelPrefab = LevelDatabase.Get().GetLevel(levelIndex);
-		levelInstance = Instantiate(levelPrefab);
-	}
-
-	public void StartLevel(int levelIndex)
-	{
-		var levelPrefab = LevelDatabase.Get().GetLevel(levelIndex);
-		levelInstance = Instantiate(levelPrefab);
-	}
-
-	public void ExitLevel()
-	{
-		Destroy(levelInstance);
-	}
-
-	public void OpenLevelSelect()
-	{
-
-	}
-
-	public void OpenSettings()
-	{
-
-	}
-
-	public void Quit()
-	{
-#if UNITY_EDITOR
-		if (EditorApplication.isPlaying)
+		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			EditorApplication.isPlaying = false;
+			Transition(GameStateType.Level);
 		}
-#endif
-		Application.Quit();
+	}
 
+	public void Transition(GameStateType newType)
+	{
+		if (states.Count > 0)
+		{
+			states.Peek().Exit();
+			states.Pop();
+		}
+
+		var state = GetState(newType);
+		states.Push(state);
+		state.Enter();
+	}
+
+	private GameState GetState(GameStateType type)
+	{
+		return type switch
+		{
+			GameStateType.MainMenu => mainMenu,
+			GameStateType.Level => level,
+			GameStateType.Settings => throw new System.NotImplementedException(),
+			_ => throw new System.NotImplementedException(),
+		};
 	}
 }
