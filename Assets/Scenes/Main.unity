@@ -6089,6 +6089,73 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOver
       objectReference: {fileID: 0}
+    - target: {fileID: 3115960767731848208, guid: 82efa95f7da5172479859040e91f8e5d,
+        type: 3}
+      propertyPath: m_text
+      value: The light fades...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115960767731848208, guid: 82efa95f7da5172479859040e91f8e5d,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115960767731848208, guid: 82efa95f7da5172479859040e91f8e5d,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3d79a3d45ff58a244a6bf20268a8087b,
+        type: 2}
+    - target: {fileID: 3115960767731848208, guid: 82efa95f7da5172479859040e91f8e5d,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115960767731848208, guid: 82efa95f7da5172479859040e91f8e5d,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.4627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115960767731848208, guid: 82efa95f7da5172479859040e91f8e5d,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.78039217
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115960767731848208, guid: 82efa95f7da5172479859040e91f8e5d,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115960767731848208, guid: 82efa95f7da5172479859040e91f8e5d,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2223754370526989174, guid: 3d79a3d45ff58a244a6bf20268a8087b,
+        type: 2}
+    - target: {fileID: 3115960767731848208, guid: 82efa95f7da5172479859040e91f8e5d,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4285974527
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115960767731848208, guid: 82efa95f7da5172479859040e91f8e5d,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4290506396327927256, guid: 82efa95f7da5172479859040e91f8e5d,
+        type: 3}
+      propertyPath: m_Name
+      value: Text-Death
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777485710936168549, guid: 82efa95f7da5172479859040e91f8e5d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777485710936168549, guid: 82efa95f7da5172479859040e91f8e5d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 271
+      objectReference: {fileID: 0}
     - target: {fileID: 5244607459157197567, guid: 82efa95f7da5172479859040e91f8e5d,
         type: 3}
       propertyPath: m_Pivot.x
@@ -6194,8 +6261,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5843452042074496029, guid: 82efa95f7da5172479859040e91f8e5d,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4137963759470164047, guid: 82efa95f7da5172479859040e91f8e5d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82efa95f7da5172479859040e91f8e5d, type: 3}
