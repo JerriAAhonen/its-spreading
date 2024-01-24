@@ -48,8 +48,9 @@ public class Enemy : MonoBehaviour
 		// If obstacle, turn around
 		var nextPos = Vector3.MoveTowards(transform.position, target.position, movementSpeed * Time.deltaTime);
 		var dir = (nextPos - transform.position).normalized;
-		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), rotationSpeed * Time.deltaTime);
+
 		transform.position = nextPos;
+		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), rotationSpeed * Time.deltaTime);
 
 		if (transform.position.InRangeOf(target.position, 0.01f))
 		{
@@ -106,6 +107,12 @@ public class Enemy : MonoBehaviour
 	{
 		if (other.gameObject.TryGetComponent<PlayerController>(out var player))
 			player.CollideWithEnemy();
+
+		if (other.gameObject.TryGetComponent<Obstacle>(out var obstacle))
+		{
+			forward = !forward;
+			SetNextTarget();
+		}
 	}
 
 	private void OnDrawGizmos()

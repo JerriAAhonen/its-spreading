@@ -5008,6 +5008,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tc: {fileID: 0}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
+  obstacleDetectionRadius: 0.4
 --- !u!114 &6882540921336665587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5020,11 +5024,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8667fdc8f38af04084bc398798e3c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 80
+  movementSpeed: 75
   rotationSpeed: 10
   model: {fileID: 140263663064507093}
   animationSpeed: 8
   animationHeightMult: 0.1
+  walkSFX: {fileID: 11400000, guid: c039fa8270316774fbc611b085d8bbbc, type: 2}
 --- !u!114 &8604148268966949114
 MonoBehaviour:
   m_ObjectHideFlags: 0

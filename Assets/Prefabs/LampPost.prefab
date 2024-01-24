@@ -189,6 +189,7 @@ MonoBehaviour:
   lampRenderer: {fileID: 5561842333198568740}
   activeMat: {fileID: 2100000, guid: ee930f95f663868478530d0f8c5e843d, type: 2}
   deactiveMat: {fileID: 2100000, guid: c7827ec6f53999840a9ee21bd90f5b2d, type: 2}
+  depositSFX: {fileID: 11400000, guid: fe2b9ff4f9c932a41af68013d7aeafcf, type: 2}
 --- !u!1001 &492414595062692820
 PrefabInstance:
   m_ObjectHideFlags: 0

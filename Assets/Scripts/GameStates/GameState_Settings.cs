@@ -5,26 +5,15 @@ using UnityEngine.UI;
 
 public class GameState_Settings : GameState
 {
-	public const string MusicVolKey = "MusicVolume";
-	public const string SoundVolKey = "SoundVolume";
-
 	[SerializeField] private Slider music;
 	[SerializeField] private Slider sound;
 	[SerializeField] private MenuButton back;
 
-	private void Awake()
+	private void Start()
 	{
-		if (PlayerPrefs.HasKey(MusicVolKey))
-		{
-			var vol = PlayerPrefs.GetFloat(MusicVolKey);
-			music.value = vol;
-		}
-
-		if (PlayerPrefs.HasKey(SoundVolKey))
-		{
-			var vol = PlayerPrefs.GetFloat(SoundVolKey);
-			sound.value = vol;
-		}
+		AudioManager.Instance.GetSavedVolumes(out float musicVol, out float sfxVol);
+		music.value = musicVol;
+		sound.value = sfxVol;
 
 		back.OnClick += OnBack;
 	}
@@ -38,22 +27,22 @@ public class GameState_Settings : GameState
 
 	public override void Exit()
 	{
+		AudioManager.Instance.SaveVolumes(music.value, sound.value);
 		gameObject.SetActive(false);
-
-		PlayerPrefs.SetFloat(MusicVolKey, music.value);
-		PlayerPrefs.SetFloat(SoundVolKey, sound.value);
 	}
 
 	#endregion
 
 	public void OnMusicVolumeChanged()
 	{
-		Debug.Log("Music vol: " + music.value);
+		Debug.Log("[Settings] Music value: " + music.value);
+		AudioManager.Instance.SetMusicVolume(music.value);
 	}
 
 	public void OnSoundVolumeChanged()
 	{
-		Debug.Log("Sound vol: " + sound.value);
+		Debug.Log("[Settings] SFX value: " + sound.value);
+		AudioManager.Instance.SetSFXVolume(sound.value);
 	}
 
 	public void OnBack()
@@ -61,6 +50,6 @@ public class GameState_Settings : GameState
         if (openedAdditively)
 			manager.CloseTopState();
 		else
-			manager.Transition(GameStateType.MainMenu);
+			manager.Transition(GameStateType.MainMenu, false);
 	}
 }

@@ -3,12 +3,14 @@
 public class GameState_Pause : GameState
 {
 	[SerializeField] private MenuButton continu;
+	[SerializeField] private MenuButton retry;
 	[SerializeField] private MenuButton settings;
 	[SerializeField] private MenuButton mainMenu;
 
 	private void Awake()
 	{
 		continu.OnClick += OnContinue;
+		retry.OnClick += OnRetry;
 		settings.OnClick += OnSettings;
 		mainMenu.OnClick += OnMainMenu;
 	}
@@ -36,6 +38,11 @@ public class GameState_Pause : GameState
 		manager.CloseTopState();
 	}
 
+	private void OnRetry()
+	{
+		manager.Transition(GameStateType.Level, true);
+	}
+
 	private void OnSettings()
 	{
 		manager.OpenAdditive(GameStateType.Settings);
@@ -44,6 +51,6 @@ public class GameState_Pause : GameState
 	private void OnMainMenu()
 	{
 		GameState_Level.ResumeTime();
-		manager.Transition(GameStateType.MainMenu);
+		manager.Transition(GameStateType.MainMenu, true);
 	}
 }

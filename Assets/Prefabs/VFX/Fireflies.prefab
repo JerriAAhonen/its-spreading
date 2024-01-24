@@ -5000,6 +5000,7 @@ MonoBehaviour:
   accelerationRateIn: -10
   ps: {fileID: 7566379522725941717}
   light: {fileID: 672979499602699342}
+  pickupSFX: {fileID: 11400000, guid: cd24a4f87b10bd840898573830b2cc26, type: 2}
 --- !u!65 &5352429280928605435
 BoxCollider:
   m_ObjectHideFlags: 0
