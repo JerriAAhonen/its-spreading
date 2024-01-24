@@ -6429,6 +6429,12 @@ MonoBehaviour:
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   defaultHighlightColor: {r: 1, g: 0.78039217, b: 0.4627451, a: 1}
   defaultDisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  pauseIcon: {fileID: 21300000, guid: ec21bbc25b8708349b2f3d73c0ccbf2d, type: 3}
+  playIcon: {fileID: 21300000, guid: 5121f61cc32a6b748b96478ded40ef24, type: 3}
+  onEnterScale: 1.1
+  onEnterDur: 0.3
+  onEnter: {fileID: 11400000, guid: 3958f2b639ad5f34980978774e21cd53, type: 2}
+  onClick: {fileID: 11400000, guid: d93e24ae639169e42aa953a032d3a786, type: 2}
 --- !u!1 &1612944377
 GameObject:
   m_ObjectHideFlags: 0

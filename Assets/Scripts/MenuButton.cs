@@ -36,6 +36,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
 		scaleTweenId = LeanTween.scale(gameObject, Vector3.one * onEnterScale, onEnterDur)
 			.setEase(LeanTweenType.easeOutBack)
+			.setIgnoreTimeScale(true)
 			.uniqueId;
 	}
 
@@ -48,6 +49,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
 		scaleTweenId = LeanTween.scale(gameObject, Vector3.one, onEnterDur)
 			.setEase(LeanTweenType.easeOutQuad)
+			.setIgnoreTimeScale(true)
 			.uniqueId;
 	}
 
