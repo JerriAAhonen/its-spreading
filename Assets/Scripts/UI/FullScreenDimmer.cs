@@ -8,6 +8,12 @@ public class FullScreenDimmer : MonoBehaviour
 	[SerializeField] private Image dimm;
 	[SerializeField] private float dur;
 
+	private void Awake()
+	{
+		dimm.SetAlpha(1f);
+		dimm.raycastTarget = true;
+	}
+
 	public float Show(bool show)
 	{
 		LeanTween.value(dimm.color.a, show ? 1f : 0f, dur)
