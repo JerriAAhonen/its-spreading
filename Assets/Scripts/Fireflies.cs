@@ -12,6 +12,7 @@ public class Fireflies : Interactable
 
 	[SerializeField] private ParticleSystem ps;
 	[SerializeField] new private Light light;
+	[SerializeField] private AudioEvent pickupSFX;
 
 	private bool active;
 
@@ -27,6 +28,8 @@ public class Fireflies : Interactable
 
 		active = false;
 		pc.CollectFireflies();
+
+		AudioManager.Instance.PlayOnce(pickupSFX);
 
 		//ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
 		StartCoroutine(PickupRoutine());

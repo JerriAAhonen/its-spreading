@@ -12,19 +12,10 @@ public class GameState_Settings : GameState
 	[SerializeField] private Slider sound;
 	[SerializeField] private MenuButton back;
 
-	private void Awake()
+	private void Start()
 	{
-		if (PlayerPrefs.HasKey(MusicVolKey))
-		{
-			var vol = PlayerPrefs.GetFloat(MusicVolKey);
-			music.value = vol;
-		}
-
-		if (PlayerPrefs.HasKey(SoundVolKey))
-		{
-			var vol = PlayerPrefs.GetFloat(SoundVolKey);
-			sound.value = vol;
-		}
+		music.value = PlayerPrefs.GetFloat(MusicVolKey, 0.75f);
+		sound.value = PlayerPrefs.GetFloat(SoundVolKey, 0.75f);
 
 		back.OnClick += OnBack;
 	}
@@ -48,12 +39,14 @@ public class GameState_Settings : GameState
 
 	public void OnMusicVolumeChanged()
 	{
-		Debug.Log("Music vol: " + music.value);
+		Debug.Log("[Settings] Music value: " + music.value);
+		AudioManager.Instance.SetMusicVolume(Mathf.Log10(music.value) * 20);
 	}
 
 	public void OnSoundVolumeChanged()
 	{
-		Debug.Log("Sound vol: " + sound.value);
+		Debug.Log("[Settings] SFX value: " + sound.value);
+		AudioManager.Instance.SetSFXVolume(Mathf.Log10(sound.value) * 20);
 	}
 
 	public void OnBack()

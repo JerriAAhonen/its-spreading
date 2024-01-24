@@ -7,6 +7,7 @@ public class LampPost : Interactable
 	[SerializeField] private MeshRenderer lampRenderer;
 	[SerializeField] private Material activeMat;
 	[SerializeField] private Material deactiveMat;
+	[SerializeField] private AudioEvent depositSFX;
 
 	private bool active;
 	private Material lampMat1;
@@ -33,6 +34,8 @@ public class LampPost : Interactable
 
 		active = true;
 		pc.DepositFireflies();
+
+		AudioManager.Instance.PlayOnce(depositSFX);
 
 		lampRenderer.materials = new Material[]
 			{

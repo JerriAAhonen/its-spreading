@@ -73,14 +73,16 @@ public class AudioManager : Singleton<AudioManager>
 		}
 	}
 
-	public void SetSFXVolume(bool on)
+	public void SetSFXVolume(float value)
 	{
-		audioMixer.SetFloat("SFXVolume", on ? 0f : -80f);
+		Debug.Log("[AudioManager] SFX vol: " + value);
+		audioMixer.SetFloat("SFXVolume", value);
 	}
 
-	public void SetMusicVolume(bool on)
+	public void SetMusicVolume(float value)
 	{
-		audioMixer.SetFloat("MusicVolume", on ? 0f : -80f);
+		Debug.Log("[AudioManager] Music vol: " + value);
+		audioMixer.SetFloat("MusicVolume", value);
 	}
 
 	/// <summary>

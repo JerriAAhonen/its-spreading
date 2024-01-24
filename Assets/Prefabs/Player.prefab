@@ -5025,6 +5025,7 @@ MonoBehaviour:
   model: {fileID: 140263663064507093}
   animationSpeed: 8
   animationHeightMult: 0.1
+  walkSFX: {fileID: 11400000, guid: c039fa8270316774fbc611b085d8bbbc, type: 2}
 --- !u!114 &8604148268966949114
 MonoBehaviour:
   m_ObjectHideFlags: 0
