@@ -50,6 +50,6 @@ public class GameState_Settings : GameState
         if (openedAdditively)
 			manager.CloseTopState();
 		else
-			manager.Transition(GameStateType.MainMenu);
+			manager.Transition(GameStateType.MainMenu, false);
 	}
 }

@@ -52,14 +52,12 @@ public class GameState_Level : GameState
 
 	private void OnLevelFailed()
 	{
-		StopTime();
 		HidePauseButton();
 		manager.OpenAdditive(GameStateType.GameOver);
 	}
 
 	private void OnLevelCompleted()
 	{
-		StopTime();
 		HidePauseButton();
 		manager.OnLevelCompleted();
 	}

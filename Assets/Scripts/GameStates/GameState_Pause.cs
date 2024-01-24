@@ -40,7 +40,7 @@ public class GameState_Pause : GameState
 
 	private void OnRetry()
 	{
-		manager.Transition(GameStateType.Level);
+		manager.Transition(GameStateType.Level, true);
 	}
 
 	private void OnSettings()
@@ -51,6 +51,6 @@ public class GameState_Pause : GameState
 	private void OnMainMenu()
 	{
 		GameState_Level.ResumeTime();
-		manager.Transition(GameStateType.MainMenu);
+		manager.Transition(GameStateType.MainMenu, true);
 	}
 }

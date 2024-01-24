@@ -25,6 +25,6 @@ public class GameState_ThanksForPlaying : GameState
 
 	private void OnMainMenu()
 	{
-		manager.Transition(GameStateType.MainMenu);
+		manager.Transition(GameStateType.MainMenu, true);
 	}
 }

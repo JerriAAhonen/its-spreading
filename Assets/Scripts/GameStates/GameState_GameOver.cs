@@ -27,11 +27,11 @@ public class GameState_GameOver : GameState
 
 	private void OnTryAgain()
 	{
-		manager.Transition(GameStateType.Level);
+		manager.Transition(GameStateType.Level, true);
 	}
 
 	private void OnMainMenu()
 	{
-		manager.Transition(GameStateType.MainMenu);
+		manager.Transition(GameStateType.MainMenu, true);
 	}
 }

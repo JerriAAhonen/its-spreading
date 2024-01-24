@@ -62,7 +62,7 @@ public class GameState_LevelSelection : GameState
 		{
 			// Play
 			manager.CurrentLevelIndex = index;
-			manager.Transition(GameStateType.Level);
+			manager.Transition(GameStateType.Level, true);
 			return;
 		}
 		else 
@@ -73,6 +73,6 @@ public class GameState_LevelSelection : GameState
 
 	private void OnBack()
 	{
-		manager.Transition(GameStateType.MainMenu);
+		manager.Transition(GameStateType.MainMenu, false);
 	}
 }
