@@ -43,7 +43,7 @@ public class GameStateManager : Singleton<GameStateManager>
 		IEnumerator Routine()
 		{
 			if (useDimming)
-				yield return StartCoroutine(WaitForRealSeconds(screenDimmer.Show(true)));
+				yield return StartCoroutine(WaitForUtil.RealSeconds(screenDimmer.Show(true))); // Have to use this because the game can be paused and timescale set to 0f when transitioning between states
 
 			while (states.Count > 0)
 			{
@@ -58,18 +58,6 @@ public class GameStateManager : Singleton<GameStateManager>
 
 			if (useDimming)
 				screenDimmer.Show(false);
-		}
-
-		// Have to use this because the game can be paused and timescale set to 0f when transitioning between states
-		IEnumerator WaitForRealSeconds(float seconds)
-		{
-			float timeRemaining = seconds;
-
-			while (timeRemaining > 0)
-			{
-				timeRemaining -= Time.unscaledDeltaTime;
-				yield return null;
-			}
 		}
 	}
 

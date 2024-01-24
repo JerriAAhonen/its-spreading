@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -42,7 +43,13 @@ public class LampPost : Interactable
 				lampMat1, activeMat
 			};
 
-		Lit?.Invoke();
+		StartCoroutine(Routine());
+
+		IEnumerator Routine()
+		{
+			yield return WaitForUtil.RealSeconds(10f);
+			Lit?.Invoke();
+		}
 	}
 
 	[Button]
