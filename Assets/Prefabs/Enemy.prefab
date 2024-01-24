@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c137d31f9589ff4493db83ba8ac4d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathFollowType: 0
   path:
   - {fileID: 3369894462482273710}
   - {fileID: 5200147538427927351}
@@ -76,8 +77,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
-  m_Height: 1.1
+  m_Radius: 0.31
+  m_Height: 0.71
   m_Direction: 1
   m_Center: {x: 0, y: 0.39, z: 0}
 --- !u!1 &2484910579358718577
@@ -113,7 +114,7 @@ Transform:
   - {fileID: 5200147538427927351}
   - {fileID: 399776419302929295}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2535379356972598104
 GameObject:

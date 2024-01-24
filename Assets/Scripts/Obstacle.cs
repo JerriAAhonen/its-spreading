@@ -75,6 +75,12 @@ public class Obstacle : MonoBehaviour
 
 	public void ActivateOutline(bool activate)
 	{
+		if (lockedInPlace)
+		{
+			outline.OutlineWidth = 0f;
+			return;
+		}
+
 		outline.OutlineWidth = activate ? 1f : 0f;
 	}
 }
