@@ -51,6 +51,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   outline: {fileID: 4561775747208901304}
+  moveDur: 0.6
+  thumpDur: 0.2
+  pushSFX: {fileID: 11400000, guid: 7e1b3714b423b7d40adf31c890d145db, type: 2}
+  thumpSFX: {fileID: 11400000, guid: 1deff00f3a965724a84c3562cc31023a, type: 2}
 --- !u!65 &4031956597808250577
 BoxCollider:
   m_ObjectHideFlags: 0

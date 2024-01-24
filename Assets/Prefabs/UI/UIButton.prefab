@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8137804046475460191}
   - component: {fileID: 4720258994936639078}
   - component: {fileID: 5118575838331686568}
+  - component: {fileID: 5592835468584331589}
   - component: {fileID: 1797074915358054867}
   m_Layer: 5
   m_Name: UIButton
@@ -59,6 +60,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7558daae878654793afed50825879c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  defaultHighlightColor: {r: 1, g: 0.78039217, b: 0.4627451, a: 1}
+  defaultDisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  onEnterScale: 1.1
+  onEnterDur: 0.3
+--- !u!114 &5592835468584331589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8946394183931690828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560f44a8a22f755459360a7b081f5d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEnter: {fileID: 11400000, guid: 3958f2b639ad5f34980978774e21cd53, type: 2}
+  onClick: {fileID: 11400000, guid: d93e24ae639169e42aa953a032d3a786, type: 2}
 --- !u!114 &1797074915358054867
 MonoBehaviour:
   m_ObjectHideFlags: 0

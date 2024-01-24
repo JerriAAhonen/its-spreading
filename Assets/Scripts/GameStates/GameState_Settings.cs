@@ -5,17 +5,15 @@ using UnityEngine.UI;
 
 public class GameState_Settings : GameState
 {
-	public const string MusicVolKey = "MusicVolume";
-	public const string SoundVolKey = "SoundVolume";
-
 	[SerializeField] private Slider music;
 	[SerializeField] private Slider sound;
 	[SerializeField] private MenuButton back;
 
 	private void Start()
 	{
-		music.value = PlayerPrefs.GetFloat(MusicVolKey, 0.75f);
-		sound.value = PlayerPrefs.GetFloat(SoundVolKey, 0.75f);
+		AudioManager.Instance.GetSavedVolumes(out float musicVol, out float sfxVol);
+		music.value = musicVol;
+		sound.value = sfxVol;
 
 		back.OnClick += OnBack;
 	}
@@ -29,10 +27,8 @@ public class GameState_Settings : GameState
 
 	public override void Exit()
 	{
+		AudioManager.Instance.SaveVolumes(music.value, sound.value);
 		gameObject.SetActive(false);
-
-		PlayerPrefs.SetFloat(MusicVolKey, music.value);
-		PlayerPrefs.SetFloat(SoundVolKey, sound.value);
 	}
 
 	#endregion
@@ -40,13 +36,13 @@ public class GameState_Settings : GameState
 	public void OnMusicVolumeChanged()
 	{
 		Debug.Log("[Settings] Music value: " + music.value);
-		AudioManager.Instance.SetMusicVolume(Mathf.Log10(music.value) * 20);
+		AudioManager.Instance.SetMusicVolume(music.value);
 	}
 
 	public void OnSoundVolumeChanged()
 	{
 		Debug.Log("[Settings] SFX value: " + sound.value);
-		AudioManager.Instance.SetSFXVolume(Mathf.Log10(sound.value) * 20);
+		AudioManager.Instance.SetSFXVolume(sound.value);
 	}
 
 	public void OnBack()

@@ -47,9 +47,11 @@ public class Enemy : MonoBehaviour
 		// Move towards target
 		// If obstacle, turn around
 		var nextPos = Vector3.MoveTowards(transform.position, target.position, movementSpeed * Time.deltaTime);
-		var dir = (nextPos - transform.position).normalized;
-		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), rotationSpeed * Time.deltaTime);
 		transform.position = nextPos;
+
+		var dir = (nextPos - transform.position).normalized;
+		if (!dir.Approximately(Vector3.zero))
+			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), rotationSpeed * Time.deltaTime);
 
 		if (transform.position.InRangeOf(target.position, 0.01f))
 		{
