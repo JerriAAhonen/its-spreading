@@ -469,12 +469,37 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2859005423046418731, guid: 9089aed517e8c1e46acdab359356f871,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2859005423046418731, guid: 9089aed517e8c1e46acdab359356f871,
+        type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2859005423046418731, guid: 9089aed517e8c1e46acdab359356f871,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844459731688250238, guid: 9089aed517e8c1e46acdab359356f871,
+        type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3844459731688250238, guid: 9089aed517e8c1e46acdab359356f871,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844459731688250238, guid: 9089aed517e8c1e46acdab359356f871,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4731540357078455530, guid: 9089aed517e8c1e46acdab359356f871,
+        type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4731540357078455530, guid: 9089aed517e8c1e46acdab359356f871,
@@ -591,6 +616,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 9156988312425118009, guid: 9089aed517e8c1e46acdab359356f871,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9156988312425118009, guid: 9089aed517e8c1e46acdab359356f871,
         type: 3}
@@ -1140,11 +1170,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourceParent: {fileID: 1142846662}
-  audioMixer: {fileID: 0}
-  sfxAudioMixerGroup: {fileID: 0}
-  musicAudioMixerGroup: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: 55e8187569c67f24ab3763ceb2510241, type: 2}
+  sfxAudioMixerGroup: {fileID: -6054800974330357070, guid: 55e8187569c67f24ab3763ceb2510241,
+    type: 2}
+  musicAudioMixerGroup: {fileID: -2620364445921679633, guid: 55e8187569c67f24ab3763ceb2510241,
+    type: 2}
   music: {fileID: 0}
-  musicVolume: 0
+  musicVolume: 1
 --- !u!4 &1142846662
 Transform:
   m_ObjectHideFlags: 0

@@ -2,7 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Windows;
+
+public enum PathFollowType
+{
+	None,
+	PingPong,
+	Loop
+}
 
 public class Enemy : MonoBehaviour
 {
@@ -10,6 +16,7 @@ public class Enemy : MonoBehaviour
 	// TODO Move whenever the player moves OR move on it's own
 	// TODO Kill the player when touch
 
+	[SerializeField] private PathFollowType pathFollowType;
 	[SerializeField] private List<Transform> path;
 	[SerializeField] private bool DEBUG_DrawPath;
 	[SerializeField] private LayerMask playerLayer;
@@ -35,6 +42,7 @@ public class Enemy : MonoBehaviour
 	private void Update()
 	{
 		if (!hasPath) return; // Just do idle animation
+		if (pathFollowType == PathFollowType.None) return;
 
 		// Move towards target
 		// If obstacle, turn around
@@ -44,6 +52,14 @@ public class Enemy : MonoBehaviour
 		transform.position = nextPos;
 
 		if (transform.position.InRangeOf(target.position, 0.01f))
+		{
+			SetNextTarget();
+		}
+	}
+
+	private void SetNextTarget()
+	{
+		if (pathFollowType == PathFollowType.PingPong)
 		{
 			// Next target
 			if (forward)
@@ -66,7 +82,21 @@ public class Enemy : MonoBehaviour
 				else
 					currentTargetIndex--;
 			}
-
+		}
+		else if (pathFollowType == PathFollowType.Loop)
+		{
+			if (forward)
+			{
+				currentTargetIndex++;
+				if (currentTargetIndex >= path.Count)
+					currentTargetIndex = 0;
+			}
+			else
+			{
+				currentTargetIndex--;
+				if (currentTargetIndex < 0)
+					currentTargetIndex = path.Count - 1;
+			}
 		}
 
 		target = path[currentTargetIndex];
@@ -81,6 +111,7 @@ public class Enemy : MonoBehaviour
 	private void OnDrawGizmos()
 	{
 		if (!DEBUG_DrawPath) return;
+		if (pathFollowType == PathFollowType.None) return;
 		if (path.IsNullOrEmpty() || path.Count == 1) return;
 
 		for (int i = 0; i < path.Count; i++)
@@ -92,6 +123,9 @@ public class Enemy : MonoBehaviour
 
 			Gizmos.DrawSphere(path[i].position, 0.1f);
 		}
+
+		if (pathFollowType == PathFollowType.Loop)
+			Gizmos.DrawLine(path[0].position, path[^1].position);
     }
 
 	[Button]
