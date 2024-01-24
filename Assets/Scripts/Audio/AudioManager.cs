@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -45,6 +43,15 @@ public class AudioManager : Singleton<AudioManager>
 				activeSources.Remove(s);
 			},
 			Destroy);
+	}
+
+	private void Start()
+	{
+		mainCamTm = Camera.main.transform;
+
+		GetSavedVolumes(out float musicVol, out float sfxVol);
+		SetMusicVolume(musicVol);
+		SetSFXVolume(sfxVol);
 
 		musicSource = CreateAudioSource();
 		musicSource.clip = music;
@@ -52,13 +59,9 @@ public class AudioManager : Singleton<AudioManager>
 		musicSource.loop = true;
 		musicSource.transform.SetParent(sourceParent);
 		musicSource.transform.localPosition = Vector3.zero;
-		musicSource.Play();
+		musicSource.spatialBlend = 0f;
 		musicSource.outputAudioMixerGroup = musicAudioMixerGroup;
-	}
-
-	private void Start()
-	{
-		mainCamTm = Camera.main.transform;
+		musicSource.Play();
 	}
 
 	private void LateUpdate()
@@ -73,17 +76,33 @@ public class AudioManager : Singleton<AudioManager>
 		}
 	}
 
+	public void GetSavedVolumes(out float music, out float sfx)
+	{
+		music = PlayerPrefs.GetFloat(MusicVolumeKey, 0.75f);
+		sfx = PlayerPrefs.GetFloat(SFXVolumeKey, 0.75f);
+	}
+
+	public void SaveVolumes(float music, float sfx)
+	{
+		PlayerPrefs.SetFloat(MusicVolumeKey, music);
+		PlayerPrefs.SetFloat(SFXVolumeKey, sfx);
+	}
+
 	public void SetSFXVolume(float value)
 	{
-		Debug.Log("[AudioManager] SFX vol: " + value);
-		audioMixer.SetFloat("SFXVolume", value);
+		var converted = ConvertToLog(value);
+		Debug.Log("[AudioManager] SFX vol: " + converted);
+		audioMixer.SetFloat("SFXVolume", converted);
 	}
 
 	public void SetMusicVolume(float value)
 	{
-		Debug.Log("[AudioManager] Music vol: " + value);
-		audioMixer.SetFloat("MusicVolume", value);
+		var converted = ConvertToLog(value);
+		Debug.Log("[AudioManager] Music vol: " + converted);
+		audioMixer.SetFloat("MusicVolume", converted);
 	}
+
+	private float ConvertToLog(float sliderValue) => Mathf.Log10(sliderValue) * 20f;
 
 	/// <summary>
 	/// Plays given Audio event once
@@ -165,8 +184,7 @@ public class AudioManager : Singleton<AudioManager>
 
 	private bool CanBePlayed(AudioEvent ae)
 	{
-		if (ae.MINInterval <= 0f)
-			return true;
+		if (ae.MINInterval <= 0f) return true;
 
 		if (cooldowns.TryGetValue(ae, out float endsAt) && Time.realtimeSinceStartup < endsAt)
 			return false;
