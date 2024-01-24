@@ -95,14 +95,6 @@ public class Enemy : MonoBehaviour
     }
 
 	[Button]
-	private void EDITOR_CreateParent()
-	{
-		var parent = new GameObject("Enemy");
-		parent.transform.position = transform.position;
-		transform.parent = parent.transform;
-	}
-
-	[Button]
 	private void EDITOR_CreatePathNode()
 	{
 		var node = new GameObject("PathNode");

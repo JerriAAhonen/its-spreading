@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 		if (!input.Approximately(Vector3.zero))
 		{
 			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(input), rotationSpeed * Time.deltaTime);
+			
 			// Animation
 			var bounceOffset = Mathf.Abs(Mathf.Sin(Time.time * animationSpeed)) * animationHeightMult;
 			model.transform.localPosition = new Vector3(0f, bounceOffset, 0f);

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2497777101485631752}
   - component: {fileID: 4031956597808250577}
   - component: {fileID: 4561775747208901304}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacle - Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 5165276146671899524}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2497777101485631752
 MonoBehaviour:
@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eca5523e6743e142a3e903e8ac551c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
   outline: {fileID: 4561775747208901304}
 --- !u!65 &4031956597808250577
 BoxCollider:
@@ -67,8 +70,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.5, z: 1}
-  m_Center: {x: 0, y: -0.25, z: 0}
+  m_Size: {x: 0.99, y: 0.5, z: 0.99}
+  m_Center: {x: 0, y: -0.24, z: 0}
 --- !u!114 &4561775747208901304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +98,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7323708284379679905}
     m_Modifications:
+    - target: {fileID: -8961359253771211100, guid: 3cac8ed782f5a3a41b83191d8ca752b8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3cac8ed782f5a3a41b83191d8ca752b8,
         type: 3}
       propertyPath: m_RootOrder
@@ -150,10 +158,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7029948723529949830, guid: 3cac8ed782f5a3a41b83191d8ca752b8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -3970904519171079269, guid: 3cac8ed782f5a3a41b83191d8ca752b8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3cac8ed782f5a3a41b83191d8ca752b8,
         type: 3}
       propertyPath: m_Name
       value: Rock-Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3cac8ed782f5a3a41b83191d8ca752b8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148817236446094103, guid: 3cac8ed782f5a3a41b83191d8ca752b8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507901977716847365, guid: 3cac8ed782f5a3a41b83191d8ca752b8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

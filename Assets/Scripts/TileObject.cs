@@ -10,8 +10,6 @@ public enum TileType
 public class TileObject : MonoBehaviour
 {
 	[SerializeField] TileType type;
-	[SerializeField] private GameObject grass;
-	[SerializeField] private GameObject water;
 
 	public TileType Type => type;
 	public Vector3Int WorldPos { get; private set; }
@@ -21,19 +19,8 @@ public class TileObject : MonoBehaviour
 		WorldPos = transform.position.ToVector3Int();
 	}
 
-	[Button]
-	private void EDITOR_SetGrass()
+	private void OnValidate()
 	{
-		type = TileType.Solid;
-		grass.SetActive(true);
-		water.SetActive(false);
-	}
-
-	[Button]
-	private void EDITOR_SetWater()
-	{
-		type = TileType.Water;
-		grass.SetActive(false);
-		water.SetActive(true);
+		gameObject.name = $"Tile-{type}";
 	}
 }
