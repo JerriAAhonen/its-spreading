@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public enum GameStateType { MainMenu, LevelSelection, Settings, Level, Pause, GameOver }
+public enum GameStateType { MainMenu, LevelSelection, Settings, Level, Pause, GameOver, ThanksForPlaying }
 
 public class GameStateManager : Singleton<GameStateManager>
 {
@@ -13,6 +13,7 @@ public class GameStateManager : Singleton<GameStateManager>
 	[SerializeField] private GameState_Level level;
 	[SerializeField] private GameState_Pause pause;
 	[SerializeField] private GameState_GameOver gameOver;
+	[SerializeField] private GameState_ThanksForPlaying thanksForPlaying;
 
 	private readonly Stack<GameState> states = new();
 
@@ -28,6 +29,7 @@ public class GameStateManager : Singleton<GameStateManager>
 		level.Init(this);
 		pause.Init(this);
 		gameOver.Init(this);
+		thanksForPlaying.Init(this);
 
 		Transition(GameStateType.MainMenu);
 	}
@@ -80,7 +82,8 @@ public class GameStateManager : Singleton<GameStateManager>
 		if (CurrentLevelIndex > LevelDatabase.Get().MaxLevelIndex)
 		{
 			Debug.Log("Last level completed, thanks for playing!");
-			Transition(GameStateType.MainMenu);
+			Transition(GameStateType.ThanksForPlaying);
+			CurrentLevelIndex = 0;
 			// TODO: Transition to Thanks for Playing screen
 			return;
 		}
@@ -98,6 +101,7 @@ public class GameStateManager : Singleton<GameStateManager>
 			GameStateType.Level => level,
 			GameStateType.Pause => pause,
 			GameStateType.GameOver => gameOver,
+			GameStateType.ThanksForPlaying => thanksForPlaying,
 			_ => throw new System.NotImplementedException(),
 		};
 	}
