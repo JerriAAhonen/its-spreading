@@ -192,6 +192,7 @@ MonoBehaviour:
   pointLight: {fileID: 5534575301020561760}
   lanternFF: {fileID: 906971209358152129}
   depositSFX: {fileID: 11400000, guid: fe2b9ff4f9c932a41af68013d7aeafcf, type: 2}
+  lanternAnimator: {fileID: 1763436061053057398}
 --- !u!1001 &492414595062692820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -255,6 +256,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6607315608305782175, guid: 240ed8b5031fb3344ad9cae622f2e37a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -83.66471
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607315608305782175, guid: 240ed8b5031fb3344ad9cae622f2e37a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -89.997604
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607315608305782175, guid: 240ed8b5031fb3344ad9cae622f2e37a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 89.997604
+      objectReference: {fileID: 0}
     - target: {fileID: 7670475773310239247, guid: 240ed8b5031fb3344ad9cae622f2e37a,
         type: 3}
       propertyPath: m_Name
@@ -267,7 +283,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9076222410037903107}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5835035801855301413, guid: 240ed8b5031fb3344ad9cae622f2e37a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1763436061053057398}
   m_SourcePrefab: {fileID: 100100000, guid: 240ed8b5031fb3344ad9cae622f2e37a, type: 3}
 --- !u!4 &2111429054306307059 stripped
 Transform:
@@ -281,6 +301,33 @@ MeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 492414595062692820}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6210286119085960433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5835035801855301413, guid: 240ed8b5031fb3344ad9cae622f2e37a,
+    type: 3}
+  m_PrefabInstance: {fileID: 492414595062692820}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1763436061053057398
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6210286119085960433}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f9d6029200ce73a488e0d53416f53cce, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &6729660968983869003 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6607315608305782175, guid: 240ed8b5031fb3344ad9cae622f2e37a,

@@ -11,6 +11,7 @@ public class LampPost : Interactable
 	[SerializeField] private Light pointLight;
 	[SerializeField] private ParticleSystem lanternFF;
 	[SerializeField] private AudioEvent depositSFX;
+	[SerializeField] private Animator lanternAnimator;
 
 	private bool active;
 	private Material lampMat1;
@@ -54,6 +55,7 @@ public class LampPost : Interactable
 			pointLight.intensity = 0f;
 			pointLight.enabled = true;
 			lanternFF.Play();
+			lanternAnimator.SetTrigger("Deposit");
 			LeanTween.value(0f, 0.4f, 2f)
 				.setOnUpdate(v => pointLight.intensity = v)
 				.setEase(LeanTweenType.easeOutCubic);
