@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class LampPost : Interactable
 	[SerializeField] private MeshRenderer lampRenderer;
 	[SerializeField] private Material activeMat;
 	[SerializeField] private Material deactiveMat;
+	[SerializeField] private Light pointLight;
+	[SerializeField] private ParticleSystem lanternFF;
 	[SerializeField] private AudioEvent depositSFX;
 
 	private bool active;
@@ -19,6 +22,8 @@ public class LampPost : Interactable
 	private void Awake()
 	{
 		active = false;
+		pointLight.enabled = false;
+		lanternFF.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 		lampMat1 = lampRenderer.materials[0];
 		lampMat2 = lampRenderer.materials[1];
 		lampRenderer.materials = new Material[]
@@ -42,7 +47,19 @@ public class LampPost : Interactable
 				lampMat1, activeMat
 			};
 
-		Lit?.Invoke();
+		StartCoroutine(Routine());
+
+		IEnumerator Routine()
+		{
+			pointLight.intensity = 0f;
+			pointLight.enabled = true;
+			lanternFF.Play();
+			LeanTween.value(0f, 0.4f, 2f)
+				.setOnUpdate(v => pointLight.intensity = v)
+				.setEase(LeanTweenType.easeOutCubic);
+			yield return WaitForUtil.RealSeconds(2f);
+			Lit?.Invoke();
+		}
 	}
 
 	[Button]

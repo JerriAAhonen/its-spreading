@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private TilesController tc;
 	[SerializeField] private LayerMask obstacleMask;
 	[SerializeField] private float obstacleDetectionRadius;
+	[SerializeField] private ParticleSystem lanternFF;
 
 	private IInputController ic;
 	private PlayerMovement movement;
@@ -26,6 +27,8 @@ public class PlayerController : MonoBehaviour
 		movement = GetComponent<PlayerMovement>();
 		movement.Init(ic);
 		capsuleCollider = GetComponent<CapsuleCollider>();
+
+		lanternFF.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 	}
 
 	private Obstacle currentlySelectedObstacle;
@@ -87,11 +90,13 @@ public class PlayerController : MonoBehaviour
 	public void CollectFireflies()
 	{
 		hasFireflies = true;
+		lanternFF.Play();
 	}
 
 	public void DepositFireflies()
 	{
 		hasFireflies = false;
+		lanternFF.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 	}
 
 	public void CollideWithEnemy()
