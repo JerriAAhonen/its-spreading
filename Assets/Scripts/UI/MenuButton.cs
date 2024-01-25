@@ -1,10 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -14,7 +11,8 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 	[Space]
 	[SerializeField] private float onEnterScale;
 	[SerializeField] private float onEnterDur;
-	
+
+	private bool buttonEnabled = true;
 	private TextMeshProUGUI text;
 	private int? scaleTweenId;
 
@@ -26,8 +24,16 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 		text = GetComponentInChildren<TextMeshProUGUI>();
 	}
 
+	public void SetButtonText(string text)
+	{
+		this.text ??= GetComponentInChildren<TextMeshProUGUI>();
+		this.text.text = text;
+	}
+
 	public void OnPointerEnter(PointerEventData eventData)
 	{
+		if (!buttonEnabled) return;
+
 		OnEnter?.Invoke();
 		text.color = defaultHighlightColor;
 
@@ -42,6 +48,8 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
+		if (!buttonEnabled) return;
+
 		text.color = defaultColor;
 
 		if (scaleTweenId.HasValue)
@@ -55,6 +63,8 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
+		if (!buttonEnabled) return;
+
 		OnClick?.Invoke();
 		OnPointerExit(null); // Reset button state after click
 	}

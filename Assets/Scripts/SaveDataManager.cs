@@ -4,7 +4,8 @@ using UnityEngine;
 
 public static class SaveDataManager
 {
-	private const string LastCompletedLevelKey = "LastCompletedLevel";
+	private const string LastCompletedLevelKey = "SaveDataManager_LastCompletedLevel";
+	private const string NextLevelKey = "SaveDataManager_NextLevel";
 
 	public static int GetLastCompletedLevel()
 	{
@@ -15,5 +16,15 @@ public static class SaveDataManager
 	{
 		var lastCompletedLevelIndex = index.AtLeast(PlayerPrefs.GetInt(LastCompletedLevelKey, -1));
 		PlayerPrefs.SetInt(LastCompletedLevelKey, lastCompletedLevelIndex);
+	}
+
+	public static int GetNextLevel()
+	{
+		return PlayerPrefs.GetInt(NextLevelKey, 0);
+	}
+
+	public static void SetNextLevel(int index)
+	{
+		PlayerPrefs.SetInt(NextLevelKey, index);
 	}
 }

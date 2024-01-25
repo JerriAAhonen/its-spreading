@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 752a4a263684a06458c2b12d176e4813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  continu: {fileID: 0}
   startGame: {fileID: 7305629401152832037}
   levels: {fileID: 7465648850732731124}
   settings: {fileID: 1963816382017449316}
@@ -235,7 +236,7 @@ PrefabInstance:
     - target: {fileID: 8137804046475460191, guid: 5bab2f9101002804c9c7b0ba3291cd7f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -96
+      value: -130
       objectReference: {fileID: 0}
     - target: {fileID: 8137804046475460191, guid: 5bab2f9101002804c9c7b0ba3291cd7f,
         type: 3}
@@ -376,7 +377,7 @@ PrefabInstance:
     - target: {fileID: 8137804046475460191, guid: 5bab2f9101002804c9c7b0ba3291cd7f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -34
       objectReference: {fileID: 0}
     - target: {fileID: 8137804046475460191, guid: 5bab2f9101002804c9c7b0ba3291cd7f,
         type: 3}
@@ -524,7 +525,7 @@ PrefabInstance:
     - target: {fileID: 8137804046475460191, guid: 5bab2f9101002804c9c7b0ba3291cd7f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -304
+      value: -338
       objectReference: {fileID: 0}
     - target: {fileID: 8137804046475460191, guid: 5bab2f9101002804c9c7b0ba3291cd7f,
         type: 3}
@@ -672,7 +673,7 @@ PrefabInstance:
     - target: {fileID: 8137804046475460191, guid: 5bab2f9101002804c9c7b0ba3291cd7f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -195
+      value: -229
       objectReference: {fileID: 0}
     - target: {fileID: 8137804046475460191, guid: 5bab2f9101002804c9c7b0ba3291cd7f,
         type: 3}

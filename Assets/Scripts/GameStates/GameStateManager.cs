@@ -33,6 +33,8 @@ public class GameStateManager : Singleton<GameStateManager>
 		gameOver.Init(this);
 		thanksForPlaying.Init(this);
 
+		CurrentLevelIndex = SaveDataManager.GetNextLevel();
+
 		Transition(GameStateType.MainMenu, true);
 	}
 
@@ -90,14 +92,17 @@ public class GameStateManager : Singleton<GameStateManager>
 	public void OnLevelCompleted()
 	{
 		SaveDataManager.SetLevelCompleted(CurrentLevelIndex);
-
 		CurrentLevelIndex++;
+		SaveDataManager.SetNextLevel(CurrentLevelIndex);
+
 		if (CurrentLevelIndex > LevelDatabase.Get().MaxLevelIndex)
 		{
 			Debug.Log("Last level completed, thanks for playing!");
-			Transition(GameStateType.ThanksForPlaying, true);
+			
 			CurrentLevelIndex = 0;
-			// TODO: Transition to Thanks for Playing screen
+			SaveDataManager.SetNextLevel(CurrentLevelIndex);
+
+			Transition(GameStateType.ThanksForPlaying, true);
 			return;
 		}
 

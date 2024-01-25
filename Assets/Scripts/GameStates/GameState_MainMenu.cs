@@ -21,7 +21,9 @@ public class GameState_MainMenu : GameState
 	#region GameState
 
 	public override void Enter() 
-	{ 
+	{
+		startGame.SetButtonText(SaveDataManager.GetNextLevel() > 0 ? "Continue" : "Start Game");
+
 		gameObject.SetActive(true);
 	}
 
