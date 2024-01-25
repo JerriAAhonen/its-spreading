@@ -15,7 +15,6 @@ public class LampPost : Interactable
 
 	private bool active;
 	private Material lampMat1;
-	private Material lampMat2;
 
 	public bool IsLit => active;
 	public event Action Lit;
@@ -26,7 +25,6 @@ public class LampPost : Interactable
 		pointLight.enabled = false;
 		lanternFF.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 		lampMat1 = lampRenderer.materials[0];
-		lampMat2 = lampRenderer.materials[1];
 		lampRenderer.materials = new Material[]
 			{
 				lampMat1, deactiveMat

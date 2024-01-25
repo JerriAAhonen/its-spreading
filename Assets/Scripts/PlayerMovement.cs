@@ -10,14 +10,16 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private AudioEvent walkSFX;
 
 	private IInputController ic;
+	private PlayerController pc;
 	private Rigidbody rb;
 	private bool goingUp;
 	private bool directionChanged;
 	private float prevHeight;
 
-	public void Init(IInputController ic)
+	public void Init(IInputController ic, PlayerController pc)
 	{
 		this.ic = ic;
+		this.pc = pc;
 		rb = GetComponent<Rigidbody>();
 	}
 
@@ -25,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (!pc.MovementEnabled) return;
+
 		var input = ic.MovementInput.normalized;
 		rb.velocity = movementSpeed * Time.deltaTime * input;
 		if (!input.Approximately(Vector3.zero))

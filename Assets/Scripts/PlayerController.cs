@@ -7,15 +7,29 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private LayerMask obstacleMask;
 	[SerializeField] private float obstacleDetectionRadius;
 	[SerializeField] private ParticleSystem lanternFF;
+	[Header("Death")]
+	[SerializeField] private float deathAnimDur;
+	[SerializeField] private ParticleSystem deathPS;
+	[SerializeField] private GameObject bodyModel;
+	[SerializeField] private GameObject lantern;
+	[SerializeField] private HingeJoint lanternHinge;
+	[SerializeField] private MeshRenderer lampRenderer;
+	[SerializeField] private Material glassUnlit;
+	[SerializeField] private Light lanternLight;
+	[SerializeField] private ParticleSystem escapingFF;
 
 	private IInputController ic;
 	private PlayerMovement movement;
 	private CapsuleCollider capsuleCollider;
 
+	private bool alive = true;
 	private bool hasFireflies;
+
+	private Material lampMat1;
 
 	public TilesController TilesController => tc;
 
+	public bool MovementEnabled { get; private set; }
 	public bool HasFireflies => hasFireflies;
 	public float Width => capsuleCollider.radius * 2f;
 
@@ -25,10 +39,12 @@ public class PlayerController : MonoBehaviour
 	{
 		ic = GetComponent<IInputController>();
 		movement = GetComponent<PlayerMovement>();
-		movement.Init(ic);
+		movement.Init(ic, this);
 		capsuleCollider = GetComponent<CapsuleCollider>();
+		MovementEnabled = true;
 
 		lanternFF.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+		lampMat1 = lampRenderer.materials[0];
 	}
 
 	private Obstacle currentlySelectedObstacle;
@@ -101,7 +117,44 @@ public class PlayerController : MonoBehaviour
 
 	public void CollideWithEnemy()
 	{
+		if (!alive) return;
+		alive = false;
+
 		Debug.Log("Dead");
-		Die?.Invoke();
+		DisableControls();
+		AnimateDeath();
+		LeanTween.delayedCall(deathAnimDur, () => 
+		{ 
+			Die?.Invoke();
+		});
+	}
+
+	private void DisableControls()
+	{
+		MovementEnabled = false;
+	}
+
+	private void AnimateDeath()
+	{
+		bodyModel.SetActive(false);
+		deathPS.Play();
+		Destroy(lanternHinge);
+		lantern.transform.SetParent(transform.parent);
+
+
+		lampRenderer.materials = new Material[]
+			{
+				lampMat1, glassUnlit
+			};
+
+		LeanTween.value(lanternLight.intensity, 0f, deathAnimDur)
+			.setOnUpdate(v => lanternLight.intensity = v);
+
+		// Animate fireflies escaping
+		if (hasFireflies)
+		{
+			lanternFF.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+			escapingFF.Play();
+		}
 	}
 }
