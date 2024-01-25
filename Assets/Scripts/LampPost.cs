@@ -8,10 +8,13 @@ public class LampPost : Interactable
 	[SerializeField] private MeshRenderer lampRenderer;
 	[SerializeField] private Material activeMat;
 	[SerializeField] private Material deactiveMat;
+	[SerializeField] private Transform lightTargetPos;
 	[SerializeField] private Light pointLight;
 	[SerializeField] private ParticleSystem lanternFF;
+	[SerializeField] private AudioEvent startDepositSFX;
 	[SerializeField] private AudioEvent depositSFX;
 	[SerializeField] private Animator lanternAnimator;
+	[SerializeField] private ParticleSystem fromPlayerToLampFF;
 
 	private bool active;
 	private Material lampMat1;
@@ -24,6 +27,7 @@ public class LampPost : Interactable
 		active = false;
 		pointLight.enabled = false;
 		lanternFF.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+		fromPlayerToLampFF.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 		lampMat1 = lampRenderer.materials[0];
 		lampRenderer.materials = new Material[]
 			{
@@ -39,24 +43,35 @@ public class LampPost : Interactable
 		active = true;
 		pc.DepositFireflies();
 
-		AudioManager.Instance.PlayOnce(depositSFX);
-
-		lampRenderer.materials = new Material[]
-			{
-				lampMat1, activeMat
-			};
+		AudioManager.Instance.PlayOnce(startDepositSFX);
 
 		StartCoroutine(Routine());
 
 		IEnumerator Routine()
 		{
-			pointLight.intensity = 0f;
+			pointLight.intensity = 0.4f;
 			pointLight.enabled = true;
-			lanternFF.Play();
-			lanternAnimator.SetTrigger("Deposit");
-			LeanTween.value(0f, 0.4f, 2f)
-				.setOnUpdate(v => pointLight.intensity = v)
-				.setEase(LeanTweenType.easeOutCubic);
+
+			var fromPos = pc.LanternMiddle.position;
+			var toPos = pointLight.transform.position;
+
+			pointLight.transform.position = fromPos;
+			fromPlayerToLampFF.Play(true);
+
+			LeanTween.move(pointLight.gameObject, toPos, 1f)
+				.setOnComplete(() =>
+				{
+					fromPlayerToLampFF.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+					
+					lanternFF.Play();
+					lanternAnimator.SetTrigger("Deposit");
+					AudioManager.Instance.PlayOnce(depositSFX);
+					lampRenderer.materials = new Material[]
+					{
+						lampMat1, activeMat
+					};
+				});
+
 			yield return WaitForUtil.RealSeconds(2f);
 			Lit?.Invoke();
 		}

@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
 	private Material lampMat1;
 
 	public TilesController TilesController => tc;
+	public Transform LanternMiddle => lanternLight.transform;
 
 	public bool MovementEnabled { get; private set; }
 	public bool HasFireflies => hasFireflies;
