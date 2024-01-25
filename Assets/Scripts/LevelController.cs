@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
+	[SerializeField] private string tutorialText;
+
 	private PlayerController player;
 	private Enemy[] enemies;
 	private LampPost[] lampPosts;
@@ -22,6 +24,11 @@ public class LevelController : MonoBehaviour
 		fireflies = GetComponentsInChildren<Fireflies>();
 		foreach (Fireflies firefly in fireflies)
 			firefly.Destroyed += OnFireflyDestroyed;
+	}
+
+	private void Start()
+	{
+		player.ShowTutorialText(tutorialText);
 	}
 
 	private void OnPlayerDied()

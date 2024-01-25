@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -17,6 +19,9 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private Material glassUnlit;
 	[SerializeField] private Light lanternLight;
 	[SerializeField] private ParticleSystem escapingFF;
+	[Space]
+	[SerializeField] private GameObject tutorialCanvas;
+	[SerializeField] private TextMeshProUGUI tutorialLabel;
 
 	private IInputController ic;
 	private PlayerMovement movement;
@@ -128,6 +133,33 @@ public class PlayerController : MonoBehaviour
 		{ 
 			Die?.Invoke();
 		});
+	}
+
+	public void ShowTutorialText(string text)
+	{
+		if (text.IsNullOrEmpty())
+		{
+			tutorialCanvas.SetActive(false);
+			return;
+		}
+
+		tutorialLabel.text = "";
+		tutorialCanvas.SetActive(true);
+
+		StartCoroutine(Routine());
+		
+
+		IEnumerator Routine()
+		{
+			foreach (char character in text.ToCharArray())
+			{
+				tutorialLabel.text += character;
+				yield return null;
+				yield return null;
+			}
+
+			LeanTween.delayedCall(5f, () => { tutorialCanvas.SetActive(false); });
+		}
 	}
 
 	private void DisableControls()
