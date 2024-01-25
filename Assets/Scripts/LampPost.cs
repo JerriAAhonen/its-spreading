@@ -3,7 +3,7 @@ using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
 
-public class LampPost : Interactable
+public class LampPost : MonoBehaviour
 {
 	[SerializeField] private MeshRenderer lampRenderer;
 	[SerializeField] private Material activeMat;
@@ -35,17 +35,21 @@ public class LampPost : Interactable
 			};
 	}
 
-	protected override void OnInteract(PlayerController pc)
+	private void OnTriggerEnter(Collider other)
 	{
 		if (active) return;
-		if (!pc.HasFireflies) return;
 
-		active = true;
-		pc.DepositFireflies();
+		if (other.gameObject.TryGetComponent<PlayerController>(out var pc))
+		{
+			if (!pc.HasFireflies) return;
 
-		AudioManager.Instance.PlayOnce(startDepositSFX);
+			active = true;
+			pc.DepositFireflies();
 
-		StartCoroutine(Routine());
+			AudioManager.Instance.PlayOnce(startDepositSFX);
+
+			StartCoroutine(Routine());
+		}
 
 		IEnumerator Routine()
 		{
@@ -75,17 +79,5 @@ public class LampPost : Interactable
 			yield return WaitForUtil.RealSeconds(2f);
 			Lit?.Invoke();
 		}
-	}
-
-	[Button]
-	private void EDITOR_Toggle()
-	{
-		var mats = lampRenderer.sharedMaterials;
-		if (mats[1] == activeMat)
-			mats[1] = deactiveMat;
-		else
-			mats[1] = activeMat;
-
-		lampRenderer.sharedMaterials = mats;
 	}
 }

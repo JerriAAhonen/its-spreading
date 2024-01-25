@@ -87,5 +87,6 @@ public class Fireflies : MonoBehaviour
 
 		ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 		light.enabled = false;
+		gameObject.SetActive(false);
 	}
 }
