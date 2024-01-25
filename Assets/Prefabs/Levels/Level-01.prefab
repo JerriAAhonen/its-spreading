@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DEBUG_showGridDebug: 0
+  wallPhysicMat: {fileID: 13400000, guid: 4718d3891026a2e4aad683fa9fa3f448, type: 2}
 --- !u!1 &2893236283596001214
 GameObject:
   m_ObjectHideFlags: 0

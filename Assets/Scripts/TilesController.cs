@@ -17,6 +17,7 @@ public class TilesController : MonoBehaviour
 	}
 
 	[SerializeField] private bool DEBUG_showGridDebug;
+	[SerializeField] private PhysicMaterial wallPhysicMat;
 
 	private readonly HashSet<Vector3Int> tileCoords = new();
 	private readonly Dictionary<Vector3Int, TileObject> tiles = new();
@@ -105,6 +106,7 @@ public class TilesController : MonoBehaviour
 						colGo.transform.position = data.WorldPos;
 						colGo.layer = 11;									// <-- Set Collider layer
 						var col = colGo.AddComponent<BoxCollider>();
+						col.material = wallPhysicMat;
 						colliders.Add(data.WorldPos.ToVector3Int(), col);
 						break;
 					case TileType.Solid: 
@@ -116,6 +118,7 @@ public class TilesController : MonoBehaviour
 						colGo.transform.position = data.WorldPos;
 						colGo.layer = 10;                                   // <-- Set Collider layer
 						col = colGo.AddComponent<BoxCollider>();
+						col.material = wallPhysicMat;
 						colliders.Add(data.WorldPos.ToVector3Int(), col);
 						break;
 				}
