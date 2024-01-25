@@ -45,7 +45,9 @@ public class LevelController : MonoBehaviour
 			foreach (Enemy enemy in enemies)
 				enemy.Die();
 
-			LeanTween.delayedCall(2f, () =>
+			var waitFor = EnvironmentController.Instance.Transition(EnvState.day, false);
+
+			LeanTween.delayedCall(waitFor, () =>
 			{
 				LevelCompleted?.Invoke();
 			});

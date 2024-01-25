@@ -25,11 +25,14 @@ public class GameState_Level : GameState
 		levelController.LevelFailed += OnLevelFailed;
 		levelController.LevelCompleted += OnLevelCompleted;
 
+		EnvironmentController.Instance.Transition(EnvState.night, true);
+
 		ResumeTime();
 	}
 
 	public override void Exit()
 	{
+		EnvironmentController.Instance.Transition(EnvState.night, true);
 		Destroy(levelInstance);
 		gameObject.SetActive(false);
 	}
