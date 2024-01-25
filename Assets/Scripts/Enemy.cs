@@ -20,9 +20,15 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private List<Transform> path;
 	[SerializeField] private bool DEBUG_DrawPath;
 	[SerializeField] private LayerMask playerLayer;
-
+	[Space]
 	[SerializeField] private float movementSpeed;
 	[SerializeField] private float rotationSpeed;
+	[SerializeField] private Transform model;
+	[SerializeField] private float animationSpeed;
+	[SerializeField] private float animationHeightMult;
+	[Space]
+	[SerializeField] private ParticleSystem deathPS;
+	[SerializeField] private ParticleSystem blackSmokePS;
 
 	private bool hasPath;
 	private bool forward;
@@ -56,6 +62,9 @@ public class Enemy : MonoBehaviour
 		{
 			SetNextTarget();
 		}
+
+		var bounceOffset = Mathf.Sin((Time.time) * animationSpeed) * animationHeightMult;
+		model.transform.localPosition = new Vector3(0f, bounceOffset, 0f);
 	}
 
 	private void SetNextTarget()
@@ -134,6 +143,15 @@ public class Enemy : MonoBehaviour
 		if (pathFollowType == PathFollowType.Loop)
 			Gizmos.DrawLine(path[0].position, path[^1].position);
     }
+
+	// Called when all the lights are lit!
+	public void Die()
+	{
+		hasPath = false; // Stops the enemy from moving
+		model.gameObject.SetActive(false);
+		deathPS.Play();
+		blackSmokePS.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+	}
 
 	[Button]
 	private void EDITOR_CreatePathNode()

@@ -4,6 +4,7 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
 	private PlayerController player;
+	private Enemy[] enemies;
 	private LampPost[] lampPosts;
 
 	public event Action LevelFailed;
@@ -13,6 +14,7 @@ public class LevelController : MonoBehaviour
 	{
 		player = GetComponentInChildren<PlayerController>();
 		player.Die += OnPlayerDied;
+		enemies = GetComponentsInChildren<Enemy>();
 		lampPosts = GetComponentsInChildren<LampPost>();
 		foreach (LampPost lamp in lampPosts)
 			lamp.Lit += OnLampLit;
@@ -28,8 +30,15 @@ public class LevelController : MonoBehaviour
 	{
 		if (AllLampsLit())
 		{
-			Debug.Log("All lamps lit");
-			LevelCompleted?.Invoke();
+			Debug.Log("All lamps lit, show end animations");
+
+			foreach (Enemy enemy in enemies)
+				enemy.Die();
+
+			LeanTween.delayedCall(2f, () =>
+			{
+				LevelCompleted?.Invoke();
+			});
 		}
 	}
 
