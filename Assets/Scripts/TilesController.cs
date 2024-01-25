@@ -103,6 +103,7 @@ public class TilesController : MonoBehaviour
 						var colGo = new GameObject("Collider");
 						colGo.transform.parent = transform;
 						colGo.transform.position = data.WorldPos;
+						colGo.layer = 11;									// <-- Set Collider layer
 						var col = colGo.AddComponent<BoxCollider>();
 						colliders.Add(data.WorldPos.ToVector3Int(), col);
 						break;
@@ -113,7 +114,7 @@ public class TilesController : MonoBehaviour
 						colGo = new GameObject("Collider");
 						colGo.transform.parent = transform;
 						colGo.transform.position = data.WorldPos;
-						colGo.layer = 10;
+						colGo.layer = 10;                                   // <-- Set Collider layer
 						col = colGo.AddComponent<BoxCollider>();
 						colliders.Add(data.WorldPos.ToVector3Int(), col);
 						break;
