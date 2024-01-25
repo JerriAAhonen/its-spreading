@@ -12,10 +12,6 @@ public enum PathFollowType
 
 public class Enemy : MonoBehaviour
 {
-	// TODO Setup path in editor
-	// TODO Move whenever the player moves OR move on it's own
-	// TODO Kill the player when touch
-
 	[SerializeField] private PathFollowType pathFollowType;
 	[SerializeField] private List<Transform> path;
 	[SerializeField] private bool DEBUG_DrawPath;

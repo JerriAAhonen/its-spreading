@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -53,59 +55,30 @@ public class PlayerController : MonoBehaviour
 		lampMat1 = lampRenderer.materials[0];
 	}
 
-	private Obstacle currentlySelectedObstacle;
+	private HashSet<Collider> oldObsCols = new();
 
 	private void Update()
 	{
-		Collider closestObstacle = null;
-		var pos = transform.position;
-		var obstacles = Physics.OverlapSphere(transform.position, obstacleDetectionRadius, obstacleMask);
-		if (!obstacles.IsNullOrEmpty())
+		var newObsCols = Physics.OverlapSphere(transform.position, obstacleDetectionRadius, obstacleMask);
+		if (!newObsCols.IsNullOrEmpty())
 		{
-			float closestDistance = Mathf.Infinity;
-			foreach (var obstacleCol in obstacles)
-			{
-				// Calculate the distance from the center of the sphere to the collider
-				float distance = Vector3.Distance(pos, obstacleCol.transform.position);
+			foreach (var newCol in newObsCols)
+				if (!oldObsCols.Contains(newCol))
+					newCol.GetComponent<Obstacle>().ActivateOutline(true);
 
-				// If this distance is smaller than the currently stored minimum distance, update the closest collider and distance
-				if (distance < closestDistance)
-				{
-					closestObstacle = obstacleCol;
-					closestDistance = distance;
-				}
-			}
+			foreach (var oldCol in oldObsCols)
+				if (!newObsCols.Contains(oldCol))
+					oldCol.GetComponent<Obstacle>().ActivateOutline(false);
 
-			var obstacle = closestObstacle.GetComponent<Obstacle>();
-			UpdateClosestObstacle(obstacle);
+			oldObsCols.Clear();
+			foreach (var obsCol in newObsCols)
+				oldObsCols.Add(obsCol);
 		}
 		else
-			UpdateClosestObstacle(null);
-	}
-
-	public void UpdateClosestObstacle(Obstacle closestObstacle)
-	{
-		// No obstacles anywhere near
-		if (closestObstacle == null && currentlySelectedObstacle == null)
 		{
-			return;
-		}
-
-		// We are no longer near an obstacle
-		if (closestObstacle == null && currentlySelectedObstacle != null)
-		{
-			currentlySelectedObstacle.ActivateOutline(false);
-			currentlySelectedObstacle = null;
-			return;
-		}
-
-		if (closestObstacle != currentlySelectedObstacle)
-		{
-			if (currentlySelectedObstacle != null)
-				currentlySelectedObstacle.ActivateOutline(false);
-			
-			currentlySelectedObstacle = closestObstacle;
-			currentlySelectedObstacle.ActivateOutline(true);
+			foreach(var oldCol in oldObsCols)
+				oldCol.GetComponent<Obstacle>().ActivateOutline(false);
+			oldObsCols.Clear();
 		}
 	}
 

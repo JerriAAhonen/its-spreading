@@ -5,6 +5,7 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
 	[SerializeField] private LayerMask playerLayer;
+	[SerializeField] private LayerMask obstacleLayer;
 	[SerializeField] private Outline outline;
 	[SerializeField] private float moveDur;
 	[SerializeField] private float thumpDur;
@@ -34,6 +35,12 @@ public class Obstacle : MonoBehaviour
 			dir.x = Mathf.RoundToInt(dir.x);
 			dir.z = dir.x == 0 ? Mathf.RoundToInt(dir.z) : 0; // If X-dir is set, don't move in Z-dir aswell. Only one dir at a time! >:(
 			dir.y = 0f;
+
+			if (Physics.Raycast(transform.position, dir, out var hit, 1f, obstacleLayer))
+			{
+				Debug.Log("Can't push into another stone");
+				return;
+			}
 
 			var targetPos = transform.position + dir;
 			if (tc.CanPushObstacleInto(targetPos, out var isWater))
@@ -66,7 +73,8 @@ public class Obstacle : MonoBehaviour
 				if (isWater)
 				{
 					// Update tiles colliders
-					tc.RemoveCollider(targetPos);
+					//tc.RemoveCollider(targetPos);
+					tc.UpdateGrid_NewSolid(targetPos);
 					lockedInPlace = true;
 				}
 			}

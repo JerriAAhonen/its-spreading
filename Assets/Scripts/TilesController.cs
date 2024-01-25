@@ -132,6 +132,16 @@ public class TilesController : MonoBehaviour
 			grid?.OnDrawGizmos_DrawDebugData();
 	}
 
+	public void UpdateGrid_NewSolid(Vector3 worldPos)
+	{
+		if (colliders.TryGetValue(worldPos.ToVector3Int(), out var col))
+		{
+			col.gameObject.SetActive(false);
+		}
+
+		grid.SetValue(worldPos, new TileData(TileType.Solid, worldPos));
+	}
+
 	public void RemoveCollider(Vector3 worldPos)
 	{
 		if (colliders.TryGetValue(worldPos.ToVector3Int(), out var col))
