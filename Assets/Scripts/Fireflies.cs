@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fireflies : Interactable
+public class Fireflies : MonoBehaviour
 {
 	[SerializeField] private float pickupDur;
 	[Range(0f, 1f)]
@@ -11,28 +12,41 @@ public class Fireflies : Interactable
 	[SerializeField] private float accelerationRateIn;
 
 	[SerializeField] private ParticleSystem ps;
+	[SerializeField] private ParticleSystem destroyedPs;
 	[SerializeField] new private Light light;
 	[SerializeField] private AudioEvent pickupSFX;
 
 	private bool active;
+
+	public event Action Destroyed;
 
 	private void Awake()
 	{
 		active = true;
 	}
 
-	protected override void OnInteract(PlayerController pc)
+	private void OnTriggerEnter(Collider other)
 	{
-		if (!active) return;
-		if (pc.HasFireflies) return;
+		if (other.gameObject.TryGetComponent<PlayerController>(out var pc))
+		{
+			if (!active) return;
+			if (pc.HasFireflies) return;
 
-		active = false;
-		pc.CollectFireflies();
+			active = false;
+			pc.CollectFireflies();
 
-		AudioManager.Instance.PlayOnce(pickupSFX);
+			AudioManager.Instance.PlayOnce(pickupSFX);
 
-		//ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-		StartCoroutine(PickupRoutine());
+			//ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+			StartCoroutine(PickupRoutine());
+		}
+
+		if (other.gameObject.TryGetComponent<Obstacle>(out _))
+		{
+			ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+			destroyedPs.Play();
+			Destroyed?.Invoke();
+		}
 	}
 
 	private IEnumerator PickupRoutine()

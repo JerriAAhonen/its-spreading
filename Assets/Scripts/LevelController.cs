@@ -6,6 +6,7 @@ public class LevelController : MonoBehaviour
 	private PlayerController player;
 	private Enemy[] enemies;
 	private LampPost[] lampPosts;
+	private Fireflies[] fireflies;
 
 	public event Action LevelFailed;
 	public event Action LevelCompleted;
@@ -18,9 +19,18 @@ public class LevelController : MonoBehaviour
 		lampPosts = GetComponentsInChildren<LampPost>();
 		foreach (LampPost lamp in lampPosts)
 			lamp.Lit += OnLampLit;
+		fireflies = GetComponentsInChildren<Fireflies>();
+		foreach (Fireflies firefly in fireflies)
+			firefly.Destroyed += OnFireflyDestroyed;
 	}
 
 	private void OnPlayerDied()
+	{
+		Debug.Log("Player Died");
+		LevelFailed?.Invoke();
+	}
+
+	private void OnFireflyDestroyed()
 	{
 		Debug.Log("Player Died");
 		LevelFailed?.Invoke();
