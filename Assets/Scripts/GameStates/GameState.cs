@@ -14,6 +14,7 @@ public abstract class GameState : MonoBehaviour
 
 	public virtual void Enter() { }
 	public virtual void Exit() { }
+	public virtual void OnFocusRestored() { }
 
 	public void SetOpendedAdditively(bool additively)
 	{

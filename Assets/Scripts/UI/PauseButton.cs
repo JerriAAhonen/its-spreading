@@ -20,35 +20,12 @@ public class PauseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
 	private Image image;
 	private int? scaleTweenId;
-	private bool isIconPauseIcon = true;
 
 	public event Action OnClick;
 
 	private void Awake()
 	{
 		image = GetComponent<Image>();
-	}
-
-	// This is horrible, and I hate myself for coming up with such an attrocity.
-	// Alas I am running out of time and so this monster shall live, and haunt me until the end of times.
-	// Or until I fix it. Let's not get our hopes up tho..
-	private void Update()
-	{
-		if (Time.timeScale.Approximately(0f) && isIconPauseIcon)
-		{
-			SetIcon(false);
-			isIconPauseIcon = false;
-		}
-		else if (Time.timeScale.Approximately(1f) && !isIconPauseIcon)
-		{
-			SetIcon(true);
-			isIconPauseIcon = true;
-		}
-	}
-
-	public void SetIcon(bool pause)
-	{
-		image.sprite = pause ? pauseIcon : playIcon;
 	}
 
 	public void OnPointerEnter(PointerEventData eventData)
@@ -82,5 +59,6 @@ public class PauseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 	{
 		AudioManager.Instance.PlayOnce(onClick);
 		OnClick?.Invoke();
+		OnPointerExit(null);
 	}
 }

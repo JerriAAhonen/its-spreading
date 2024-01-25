@@ -38,20 +38,20 @@ public class GameState_Level : GameState
 		gameObject.SetActive(false);
 	}
 
+	public override void OnFocusRestored()
+	{
+		ShowPauseButton(true);
+	}
+
 	#endregion
 
 	private void OnPause()
 	{
-		if (manager.IsStateOpen<GameState_Pause>())
-		{
-			manager.CloseTopState();
-			ResumeTime();
-		}
-		else
-		{
-			StopTime();
-			manager.OpenAdditive(GameStateType.Pause);
-		}
+		
+		StopTime();
+		manager.OpenAdditive(GameStateType.Pause);
+		ShowPauseButton(false);
+		
 	}
 
 	private void OnLevelFailed()

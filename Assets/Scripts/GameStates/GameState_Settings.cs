@@ -8,6 +8,7 @@ public class GameState_Settings : GameState
 	[SerializeField] private Slider music;
 	[SerializeField] private Slider sound;
 	[SerializeField] private MenuButton back;
+	[SerializeField] private Button inputCatcher;
 
 	private void Start()
 	{
@@ -16,6 +17,7 @@ public class GameState_Settings : GameState
 		sound.value = sfxVol;
 
 		back.OnClick += OnBack;
+		inputCatcher.onClick.AddListener(OnClickedOutside);
 	}
 
 	#region GameState
@@ -51,5 +53,11 @@ public class GameState_Settings : GameState
 			manager.CloseTopState();
 		else
 			manager.Transition(GameStateType.MainMenu, false);
+	}
+
+	public void OnClickedOutside()
+	{
+		Debug.Log("[Settings] Clicked outside!");
+		OnBack();
 	}
 }

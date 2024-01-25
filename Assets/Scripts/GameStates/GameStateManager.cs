@@ -79,6 +79,8 @@ public class GameStateManager : Singleton<GameStateManager>
 			states.Peek().SetOpendedAdditively(false);
 			states.Pop();
 		}
+
+		states.Peek().OnFocusRestored();
 	}
 
 	public bool IsStateOpen<T>() where T : GameState
