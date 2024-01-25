@@ -9,6 +9,8 @@ public class GameState_MainMenu : GameState
 	[SerializeField] private MenuButton levels;
 	[SerializeField] private MenuButton settings;
 	[SerializeField] private MenuButton exit;
+	[SerializeField] private Transform cameraTm;
+	[SerializeField] private ParticleSystem mainMenuParticles;
 
 	private void Awake()
 	{
@@ -23,6 +25,9 @@ public class GameState_MainMenu : GameState
 	public override void Enter() 
 	{
 		startGame.SetButtonText(SaveDataManager.GetNextLevel() > 0 ? "Continue" : "Start Game");
+		
+		cameraTm.position = Vector3.zero;
+		mainMenuParticles.Play();
 
 		gameObject.SetActive(true);
 	}
@@ -30,6 +35,7 @@ public class GameState_MainMenu : GameState
 	public override void Exit() 
 	{
 		gameObject.SetActive(false);
+		mainMenuParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 	}
 
 	#endregion
