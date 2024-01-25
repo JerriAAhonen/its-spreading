@@ -28,6 +28,7 @@ public class GameState_Level : GameState
 		EnvironmentController.Instance.Transition(EnvState.night, true);
 
 		ResumeTime();
+		ShowPauseButton(true);
 	}
 
 	public override void Exit()
@@ -55,13 +56,13 @@ public class GameState_Level : GameState
 
 	private void OnLevelFailed()
 	{
-		HidePauseButton();
+		ShowPauseButton(false);
 		manager.OpenAdditive(GameStateType.GameOver);
 	}
 
 	private void OnLevelCompleted()
 	{
-		HidePauseButton();
+		ShowPauseButton(false);
 		manager.OnLevelCompleted();
 	}
 
@@ -75,8 +76,8 @@ public class GameState_Level : GameState
 		Time.timeScale = 1f;
 	}
 
-	private void HidePauseButton()
+	private void ShowPauseButton(bool show)
 	{
-		pauseButton.gameObject.SetActive(false);
+		pauseButton.gameObject.SetActive(show);
 	}
 }
