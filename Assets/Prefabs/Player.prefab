@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 7387727759865140020}
   - component: {fileID: 4770094399747843031}
   m_Layer: 6
-  m_Name: MovementVFX
+  m_Name: MovementPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

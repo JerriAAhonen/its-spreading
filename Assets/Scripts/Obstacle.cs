@@ -11,6 +11,7 @@ public class Obstacle : MonoBehaviour
 	[SerializeField] private float thumpDur;
 	[SerializeField] private AudioEvent pushSFX;
 	[SerializeField] private AudioEvent thumpSFX;
+	[SerializeField] private ParticleSystem thumpPS;
 
 	private bool lockedInPlace; // Is the obstacle pushed into a waterTile?
 	private bool isMoving;
@@ -64,6 +65,7 @@ public class Obstacle : MonoBehaviour
 									// Thump
 									AudioManager.Instance.PlayOnce(thumpSFX);
 									// Dust
+									thumpPS.Play();
 
 									isMoving = false;
 								});
