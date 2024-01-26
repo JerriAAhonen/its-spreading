@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour
@@ -12,6 +13,7 @@ public class Obstacle : MonoBehaviour
 	[SerializeField] private AudioEvent pushSFX;
 	[SerializeField] private AudioEvent thumpSFX;
 	[SerializeField] private ParticleSystem thumpPS;
+	[SerializeField] private CinemachineImpulseSource impulseSource;
 
 	private bool lockedInPlace; // Is the obstacle pushed into a waterTile?
 	private bool isMoving;
@@ -56,7 +58,7 @@ public class Obstacle : MonoBehaviour
 						if (isWater)
 						{
 							tc.UpdateGrid_HideTile(targetPos);
-
+							
 							targetPos = targetPos.With(y: 0f);
 							LeanTween.move(gameObject, targetPos, thumpDur)
 								.setEase(LeanTweenType.easeInOutQuart)
@@ -64,6 +66,7 @@ public class Obstacle : MonoBehaviour
 								{
 									// Thump
 									AudioManager.Instance.PlayOnce(thumpSFX);
+									impulseSource.GenerateImpulse();
 									// Dust
 									thumpPS.Play();
 
