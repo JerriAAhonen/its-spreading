@@ -6,25 +6,7 @@ public class KeyboardAndMouseInput : MonoBehaviour, IInputController
 
 	private void Update()
 	{
-		MovementInput = Vector3.zero;
-
-		if (Input.GetKey(KeyCode.W))
-		{
-			MovementInput += Vector3.forward;
-		}
-		if (Input.GetKey(KeyCode.A))
-		{
-			MovementInput += Vector3.left;
-		}
-		if (Input.GetKey(KeyCode.S))
-		{
-			MovementInput += Vector3.back;
-		}
-		if (Input.GetKey(KeyCode.D))
-		{
-			MovementInput += Vector3.right;
-		}
-
+		MovementInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
 
 		// 45 degree rotation matrix
 		float cos45 = Mathf.Cos(Mathf.Deg2Rad * 45);
