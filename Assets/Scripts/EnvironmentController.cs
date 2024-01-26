@@ -22,15 +22,10 @@ public class EnvironmentController : Singleton<EnvironmentController>
 	[Header("Settings")]
 	[SerializeField] private float transitionDur;
 
-	private EnvState curState = EnvState.night;
+	private Coroutine transitionRoutine;
 
 	public float Transition(EnvState state, bool instant)
 	{
-		if (state == curState)
-			return 0f;
-
-		curState = state;
-
 		var fromBgColor = backgroundCamera.backgroundColor;
 		var toBgColor = state == EnvState.night ? cameraBgNightColor : cameraBgDayColor;
 
@@ -43,7 +38,7 @@ public class EnvironmentController : Singleton<EnvironmentController>
 		if (instant)
 			Set();
 		else
-			StartCoroutine(Routine());
+			transitionRoutine = StartCoroutine(Routine());
 
 		return instant ? 0f : transitionDur;
 
@@ -67,6 +62,12 @@ public class EnvironmentController : Singleton<EnvironmentController>
 
 		void Set()
 		{
+			if (transitionRoutine != null)
+			{
+				StopCoroutine(transitionRoutine);
+				transitionRoutine = null;
+			}
+
 			backgroundCamera.backgroundColor = toBgColor;
 			backgroundTrees.color = toTreeColor;
 			RenderSettings.ambientLight = toEnvColor;

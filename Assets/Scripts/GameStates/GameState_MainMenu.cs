@@ -30,6 +30,8 @@ public class GameState_MainMenu : GameState
 		cameraTm.position = Vector3.zero;
 		mainMenuParticles.Play();
 
+		EnvironmentController.Instance.Transition(EnvState.night, true);
+
 		gameObject.SetActive(true);
 	}
 
