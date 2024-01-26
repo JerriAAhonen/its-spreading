@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
 	public float Width => capsuleCollider.radius * 2f;
 
 	public event Action Die;
+	public event Action DeathAnimComplete;
 
 	private void Awake()
 	{
@@ -100,12 +101,14 @@ public class PlayerController : MonoBehaviour
 		alive = false;
 
 		Debug.Log("Dead");
+		Die?.Invoke();
+		
 		DisableControls();
 		AnimateDeath();
 		LeanTween.delayedCall(deathAnimDur, () => 
 		{ 
 			if (this != null)
-				Die?.Invoke();
+				DeathAnimComplete?.Invoke();
 		});
 	}
 

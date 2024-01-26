@@ -4,6 +4,9 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
 	[SerializeField] private string tutorialText;
+	[Space]
+	[SerializeField] private GameObject playerFollowCam;
+	[SerializeField] private GameObject playerDeathCam;
 
 	private PlayerController player;
 	private Enemy[] enemies;
@@ -17,13 +20,20 @@ public class LevelController : MonoBehaviour
 	{
 		player = GetComponentInChildren<PlayerController>();
 		player.Die += OnPlayerDied;
+		player.DeathAnimComplete += OnPlayerDeathAnimComplete;
+
 		enemies = GetComponentsInChildren<Enemy>();
+
 		lampPosts = GetComponentsInChildren<LampPost>();
 		foreach (LampPost lamp in lampPosts)
 			lamp.Lit += OnLampLit;
+		
 		fireflies = GetComponentsInChildren<Fireflies>();
 		foreach (Fireflies firefly in fireflies)
 			firefly.Destroyed += OnFireflyDestroyed;
+
+		playerFollowCam.SetActive(true); 
+		playerDeathCam.SetActive(false);
 	}
 
 	private void Start()
@@ -34,6 +44,13 @@ public class LevelController : MonoBehaviour
 	private void OnPlayerDied()
 	{
 		Debug.Log("Player Died");
+
+		playerFollowCam.SetActive(false);
+		playerDeathCam.SetActive(true);
+	}
+
+	private void OnPlayerDeathAnimComplete()
+	{
 		LevelFailed?.Invoke();
 	}
 
