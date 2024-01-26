@@ -44,16 +44,13 @@ public class PlayerController : MonoBehaviour
 	public event Action Die;
 	public event Action DeathAnimComplete;
 
-	private IEnumerator Start()
+	private void Start()
 	{
 		ic = GetComponent<IInputController>();
 		movement = GetComponent<PlayerMovement>();
 		movement.Init(ic, this);
 		capsuleCollider = GetComponent<CapsuleCollider>();
 		MovementEnabled = true;
-
-		yield return null;
-
 		lanternFF.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 		lampMat1 = lampRenderer.materials[0];
 	}

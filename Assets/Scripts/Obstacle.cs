@@ -18,7 +18,7 @@ public class Obstacle : MonoBehaviour
 	private bool lockedInPlace; // Is the obstacle pushed into a waterTile?
 	private bool isMoving;
 
-	private void Awake()
+	private void Start()
 	{
 		outline.OutlineWidth = 0f;
 	}
