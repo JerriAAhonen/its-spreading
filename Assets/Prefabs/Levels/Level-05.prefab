@@ -5038,7 +5038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01089fb1258c55a4a9f70cc554c01fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialText: I should watch out for that shadow...
+  tutorialText: 
   playerFollowCam: {fileID: 301986596628733461}
   playerDeathCam: {fileID: 8800264667502790553}
 --- !u!1 &4504659874758864118

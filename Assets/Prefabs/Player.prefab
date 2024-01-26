@@ -15191,7 +15191,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I should avoid those shadows...
+  m_text: I can guide those fireflies to that lamp post
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 89a4338061a4887419c41e53a1b39fd0, type: 2}
   m_sharedMaterial: {fileID: -1422762710984189788, guid: 89a4338061a4887419c41e53a1b39fd0,
