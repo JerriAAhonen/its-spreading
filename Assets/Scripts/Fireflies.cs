@@ -16,14 +16,9 @@ public class Fireflies : MonoBehaviour
 	[SerializeField] new private Light light;
 	[SerializeField] private AudioEvent pickupSFX;
 
-	private bool active;
+	private bool active = true;
 
 	public event Action Destroyed;
-
-	private void Awake()
-	{
-		active = true;
-	}
 
 	private void OnTriggerEnter(Collider other)
 	{

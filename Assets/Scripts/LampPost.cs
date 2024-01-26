@@ -22,8 +22,10 @@ public class LampPost : MonoBehaviour
 	public bool IsLit => active;
 	public event Action Lit;
 
-	private void Awake()
+	private IEnumerator Start()
 	{
+		yield return null;
+
 		active = false;
 		pointLight.enabled = false;
 		lanternFF.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
