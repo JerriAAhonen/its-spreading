@@ -104,7 +104,8 @@ public class PlayerController : MonoBehaviour
 		AnimateDeath();
 		LeanTween.delayedCall(deathAnimDur, () => 
 		{ 
-			Die?.Invoke();
+			if (this != null)
+				Die?.Invoke();
 		});
 	}
 
@@ -131,7 +132,11 @@ public class PlayerController : MonoBehaviour
 				yield return null;
 			}
 
-			LeanTween.delayedCall(5f, () => { tutorialCanvas.SetActive(false); });
+			LeanTween.delayedCall(5f, () => 
+			{
+				if (this != null)
+					tutorialCanvas.SetActive(false); 
+			});
 		}
 	}
 

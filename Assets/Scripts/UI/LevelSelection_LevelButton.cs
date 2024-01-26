@@ -51,7 +51,7 @@ public class LevelSelection_LevelButton : MonoBehaviour, IPointerEnterHandler, I
 		if (scaleTweenId.HasValue)
 			LeanTween.cancel(scaleTweenId.Value);
 
-		scaleTweenId = LeanTween.scale(gameObject, Vector3.one * onEnterScale, onEnterDur)
+		scaleTweenId = LeanTween.scale(scaleContainer.gameObject, Vector3.one * onEnterScale, onEnterDur)
 			.setEase(LeanTweenType.easeOutBack)
 			.setIgnoreTimeScale(true)
 			.uniqueId;
@@ -62,7 +62,7 @@ public class LevelSelection_LevelButton : MonoBehaviour, IPointerEnterHandler, I
 		if (scaleTweenId.HasValue)
 			LeanTween.cancel(scaleTweenId.Value);
 
-		scaleTweenId = LeanTween.scale(gameObject, Vector3.one, onEnterDur)
+		scaleTweenId = LeanTween.scale(scaleContainer.gameObject, Vector3.one, onEnterDur)
 			.setEase(LeanTweenType.easeOutQuad)
 			.setIgnoreTimeScale(true)
 			.uniqueId;

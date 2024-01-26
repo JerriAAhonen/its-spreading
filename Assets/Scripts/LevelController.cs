@@ -56,7 +56,8 @@ public class LevelController : MonoBehaviour
 
 			LeanTween.delayedCall(waitFor, () =>
 			{
-				LevelCompleted?.Invoke();
+				if (this != null)
+					LevelCompleted?.Invoke();
 			});
 		}
 	}
