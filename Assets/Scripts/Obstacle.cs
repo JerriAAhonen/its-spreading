@@ -54,6 +54,8 @@ public class Obstacle : MonoBehaviour
 					{
 						if (isWater)
 						{
+							tc.UpdateGrid_HideTile(targetPos);
+
 							targetPos = targetPos.With(y: 0f);
 							LeanTween.move(gameObject, targetPos, thumpDur)
 								.setEase(LeanTweenType.easeInOutQuart)

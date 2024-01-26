@@ -142,11 +142,11 @@ public class TilesController : MonoBehaviour
 		grid.SetValue(worldPos, new TileData(TileType.Solid, worldPos));
 	}
 
-	public void RemoveCollider(Vector3 worldPos)
+	public void UpdateGrid_HideTile(Vector3 worldPos)
 	{
-		if (colliders.TryGetValue(worldPos.ToVector3Int(), out var col))
+		if (tiles.TryGetValue(worldPos.ToVector3Int(), out TileObject tileObj))
 		{
-			col.gameObject.SetActive(false);
+			tileObj.gameObject.SetActive(false);
 		}
 	}
 
