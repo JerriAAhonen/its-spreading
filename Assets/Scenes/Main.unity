@@ -6712,12 +6712,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundCamera: {fileID: 330585545}
   cameraBgNightColor: {r: 0.19607843, g: 0.18039216, b: 0.3882353, a: 0}
-  cameraBgDayColor: {r: 0.9254902, g: 0.7607843, b: 0.5294118, a: 0}
+  cameraBgDayColor: {r: 0.8113208, g: 0.63785607, b: 0.39417946, a: 0}
   backgroundTrees: {fileID: 1940915835}
   treesNightColor: {r: 1, g: 1, b: 1, a: 0.34117648}
   treesDayColor: {r: 1, g: 1, b: 1, a: 0.105882354}
   envNightColor: {r: 0.5294118, g: 0.43137255, b: 0.54901963, a: 1}
-  envDayColor: {r: 1.3904021, g: 1.39772, b: 1.0245068, a: 1}
+  envDayColor: {r: 1.2104154, g: 1.216786, b: 0.89188504, a: 1}
   transitionDur: 3
 --- !u!4 &1743155883
 Transform:
