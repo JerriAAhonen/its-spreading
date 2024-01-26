@@ -22,7 +22,7 @@ public class LampPost : MonoBehaviour
 	public bool IsLit => active;
 	public event Action Lit;
 
-	private void Awake()
+	private void Start()
 	{
 		active = false;
 		pointLight.enabled = false;

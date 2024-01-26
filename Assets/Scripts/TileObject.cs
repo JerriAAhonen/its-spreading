@@ -18,9 +18,4 @@ public class TileObject : MonoBehaviour
 	{
 		WorldPos = transform.position.ToVector3Int();
 	}
-
-	private void OnValidate()
-	{
-		gameObject.name = $"Tile-{type}";
-	}
 }

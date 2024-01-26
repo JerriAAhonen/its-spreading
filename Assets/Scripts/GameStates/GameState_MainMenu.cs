@@ -25,9 +25,12 @@ public class GameState_MainMenu : GameState
 	public override void Enter() 
 	{
 		startGame.SetButtonText(SaveDataManager.GetNextLevel() > 0 ? "Continue" : "Start Game");
+		//Debug.Log("[MainMenu] GetNextLevel() = " + SaveDataManager.GetNextLevel());
 		
 		cameraTm.position = Vector3.zero;
 		mainMenuParticles.Play();
+
+		EnvironmentController.Instance.Transition(EnvState.night, true);
 
 		gameObject.SetActive(true);
 	}

@@ -332,7 +332,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: 0.27984816, y: 0.3647052, z: -0.1159169, w: 0.8804763}
-  m_LocalPosition: {x: -5.7735033, y: 5.7735033, z: -5.7735023}
+  m_LocalPosition: {x: 4.2264953, y: 5.773503, z: 6.2265}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1317,7 +1317,7 @@ MonoBehaviour:
   musicAudioMixerGroup: {fileID: -2620364445921679633, guid: 55e8187569c67f24ab3763ceb2510241,
     type: 2}
   music: {fileID: 8300000, guid: a8dc997ba046c694eab44ec14f306aef, type: 3}
-  musicVolume: 1
+  musicVolume: 0.5
 --- !u!4 &1142846662
 Transform:
   m_ObjectHideFlags: 0
@@ -6651,8 +6651,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_ScreenMatchMode: 2
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -6712,12 +6712,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundCamera: {fileID: 330585545}
   cameraBgNightColor: {r: 0.19607843, g: 0.18039216, b: 0.3882353, a: 0}
-  cameraBgDayColor: {r: 0.9254902, g: 0.7607843, b: 0.5294118, a: 0}
+  cameraBgDayColor: {r: 0.8113208, g: 0.63785607, b: 0.39417946, a: 0}
   backgroundTrees: {fileID: 1940915835}
   treesNightColor: {r: 1, g: 1, b: 1, a: 0.34117648}
   treesDayColor: {r: 1, g: 1, b: 1, a: 0.105882354}
   envNightColor: {r: 0.5294118, g: 0.43137255, b: 0.54901963, a: 1}
-  envDayColor: {r: 1.3904021, g: 1.39772, b: 1.0245068, a: 1}
+  envDayColor: {r: 1.2104154, g: 1.216786, b: 0.89188504, a: 1}
   transitionDur: 3
 --- !u!4 &1743155883
 Transform:

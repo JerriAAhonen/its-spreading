@@ -44,19 +44,18 @@ public class PlayerController : MonoBehaviour
 	public event Action Die;
 	public event Action DeathAnimComplete;
 
-	private void Awake()
+	private void Start()
 	{
 		ic = GetComponent<IInputController>();
 		movement = GetComponent<PlayerMovement>();
 		movement.Init(ic, this);
 		capsuleCollider = GetComponent<CapsuleCollider>();
 		MovementEnabled = true;
-
 		lanternFF.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 		lampMat1 = lampRenderer.materials[0];
 	}
 
-	private HashSet<Collider> oldObsCols = new();
+	private readonly HashSet<Collider> oldObsCols = new();
 
 	private void Update()
 	{
