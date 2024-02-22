@@ -36,9 +36,19 @@ public class EnvironmentController : Singleton<EnvironmentController>
 		var toEnvColor = state == EnvState.night ? envNightColor : envDayColor;
 
 		if (instant)
+		{
 			Set();
+		}
 		else
+		{
+			if (transitionRoutine != null)
+			{
+				StopCoroutine(transitionRoutine);
+				transitionRoutine = null;
+			}
+
 			transitionRoutine = StartCoroutine(Routine());
+		}
 
 		return instant ? 0f : transitionDur;
 
