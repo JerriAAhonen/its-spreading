@@ -147,6 +147,11 @@ public class Enemy : MonoBehaviour
 		model.gameObject.SetActive(false);
 		deathPS.Play();
 		blackSmokePS.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+		LeanTween.delayedCall(deathPS.main.duration, () =>
+		{
+			if (this != null)
+				gameObject.SetActive(false);
+		});
 	}
 
 	[Button]
