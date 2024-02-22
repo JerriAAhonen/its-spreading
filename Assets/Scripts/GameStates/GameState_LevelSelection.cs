@@ -27,6 +27,7 @@ public class GameState_LevelSelection : GameState
 			{
 				var button = Instantiate(prefab);
 				button.transform.SetParent(gridView);
+				button.transform.localScale = Vector3.one;
 				button.Init(i);
 				button.LevelSelected += OnLevelSelected;
 				levelButtons.Add(button);
